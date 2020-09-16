@@ -1,0 +1,161 @@
+<form [formGroup]="searchForm" (submit)="handleSearch()" class="content mt-4">
+  <h5 id="text">Mua bán bất động sản</h5>
+  <div class="form-group row">
+    <div class="col-sm-12 pb-1">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="keyword"
+        name="keyword"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="addon-wrapping"
+      />
+    </div>
+    <div class="col-sm-12 col-md-6 pb-1">
+      <select name="region" class="form-control">
+        <option>--Chọn vùng miền--</option>
+      </select>
+    </div>
+    <div class="col-sm-12 col-md-6 pb-1">
+      <select name="category" class="form-control">
+        <option>--Chọn danh mục--</option>
+      </select>
+    </div>
+    <div class="col-sm-12 row justify-content-between">
+      <div class="col-sm-6">
+        <h5>Tất cả Cá nhân/Tổ chức.</h5>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-warning">
+          <i class="fa fa-search"></i> Tìm kiếm
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+<div *ngIf="loading$ | async" class="align-items-center">
+  <h3 class="text-warning text-center">
+    <div class="spinner-border text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    Đang loading!
+  </h3>
+</div>
+
+<div
+  *ngIf="(posts$ | async)?.empty && !(loading$ | async)"
+  class="align-items-center"
+>
+  <h3 class="text-warning text-center">Không tìm thấy bài đăng!</h3>
+</div>
+<div
+  *ngIf="!(loading$ | async)"
+  class="col-sm-12 align-content-center"
+  style="height: 1150px"
+>
+  <div class="row">
+    <div
+      class="col-sm-12 col-md-6 col-lg-4 mb-2"
+      *ngFor="let post of (posts$ | async)?.content"
+    >
+      <div
+        class="card"
+        *ngIf="post.approved"
+        [routerLink]="['/post-detail', post.id]"
+      >
+        <img
+          *ngIf="post.postImages.length !== 0"
+          class="card-img-top"
+          [src]="post.postImages[0].image"
+          height="200"
+          alt="post image"
+        />
+        <img
+          *ngIf="post.postImages.length === 0"
+          class="card-img-top"
+          [src]="'../../../../../assets/img/no-image.jpg'"
+          height="200"
+          alt="post image"
+        />
+        <div class="card-body">
+          <div class="p-title">
+            <p class="card-title" *ngIf="post.postType !== null">
+              [{{ post?.postType.name }}]&nbsp;
+            </p>
+          </div>
+          <div class="p-title">
+            <p class="card-title">{{ post.title }}</p>
+          </div>
+          <p class="post-price">
+            Giá: <strong>{{ post.price | number }}</strong> VNĐ
+          </p>
+          <div class="post-info">
+            <div style="height: 26px">
+              <div *ngIf="post.region !== null">
+                <i class="fas fa-map-marker-alt"></i> tại
+                {{ post?.region.name }}
+              </div>
+            </div>
+            <div>Ngày đăng: {{ post.createdAt | date: "dd/MM/yyyy" }}</div>
+            <div>
+              <span>
+                <i class="fas fa-eye"></i> Lượt xem {{ post.viewCount }}
+              </span>
+              <label class="float-right" *ngIf="post.customerType"
+                >Cá nhân</label
+              >
+              <label class="float-right" *ngIf="!post.customerType"
+                >Công ty</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nav
+  *ngIf="
+    (posts$ | async)?.totalPages !== 1 &&
+    !(posts$ | async)?.empty &&
+    !(loading$ | async)
+  "
+  class="d-flex justify-content-center"
+>
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.first }">
+      <span class="page-link" (click)="jumpToPage(1)">
+        <em class="fa fa-angle-double-left"></em>
+      </span>
+    </li>
+    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.first }">
+      <span class="page-link" (click)="jumpToPage(pager.currentPage - 1)">
+        <em class="fa fa-angle-left"></em>
+      </span>
+    </li>
+    <li class="page-item" *ngIf="pager.startPage > 1">
+      <a class="page-link">...</a>
+    </li>
+    <li
+      *ngFor="let page of pager.pages"
+      class="page-item"
+      [class.active]="(posts$ | async)?.number === page - 1"
+    >
+      <span class="page-link" (click)="jumpToPage(page)">{{ page }}</span>
+    </li>
+    <li class="page-item" *ngIf="pager.endPage < (posts$ | async).totalPages">
+      <a class="page-link">...</a>
+    </li>
+    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.last }">
+      <span class="page-link" (click)="jumpToPage(pager.currentPage + 1)">
+        <em class="fa fa-angle-right"></em>
+      </span>
+    </li>
+    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.last }">
+      <span class="page-link" (click)="jumpToPage(pager.totalPages)">
+        <em class="fa fa-angle-double-right"></em>
+      </span>
+    </li>
+  </ul>
+</nav>

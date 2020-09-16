@@ -1,0 +1,47 @@
+.post-info {
+  font-size: 14px;
+  line-height: 26px;
+  color: #777;
+}
+
+.post-price {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  color: #055699;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+p.card-title {
+  color: #2d373f;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.card-body {
+  padding: 5px;
+}
+
+.p-title {
+  min-height: 25px;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

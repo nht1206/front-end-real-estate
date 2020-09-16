@@ -1,0 +1,219 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="advanceSearchModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Tìm kiếm</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row advance-search-item">
+            <div class="col-4">
+              <p class="right-bottom">Danh mục:</p>
+            </div>
+            <div class="col-md-8">
+              <select
+                name="category"
+                formControlName="categoryId"
+                class="custom-select"
+                id="categorySelect"
+              >
+                <option>Tất cả</option>
+              </select>
+            </div>
+          </div>
+          <div class="row advance-search-item">
+            <div class="col-4">
+              <p class="right-bottom">Vùng miền:</p>
+            </div>
+            <div class="col-md-8">
+              <select
+                name="region"
+                formControlName="regionId"
+                class="custom-select"
+                id="regionSelect"
+              >
+                <option>Tất cả</option>
+              </select>
+            </div>
+          </div>
+          <div class="row advance-search-item">
+            <div class="col-4">
+              <p class="right-bottom">Người đăng tin:</p>
+            </div>
+            <div class="col-8">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="customerType"
+                  formControlName="customerType"
+                  id="poster1"
+                  [value]="null"
+                />
+                <label class="form-check-label" for="poster1">Tất cả</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="customerType"
+                  formControlName="customerType"
+                  id="poster2"
+                  [value]="true"
+                />
+                <label class="form-check-label" for="poster2">Cá nhân</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="customerType"
+                  formControlName="customerType"
+                  id="poster3"
+                  [value]="false"
+                />
+                <label class="form-check-label" for="poster3">Công ty</label>
+              </div>
+            </div>
+          </div>
+          <div class="row advance-search-item">
+            <div class="col-md-4">
+              <p class="right-bottom">Loại tin:</p>
+            </div>
+            <div class="col-md-8">
+              <select
+                name="region"
+                formControlName="postTypeId"
+                class="custom-select"
+                id="postTypeSelect"
+              >
+                <option>Tất cả</option>
+              </select>
+            </div>
+          </div>
+          <div class="row advance-search-item">
+            <div class="col-4">
+              <p class="right-bottom">Tình trạng:</p>
+            </div>
+            <div class="col-8">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="condition"
+                  formControlName="condition"
+                  id="condition1"
+                  [value]="null"
+                />
+                <label class="form-check-label" for="poster1">Tất cả</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="condition"
+                  formControlName="condition"
+                  id="condition2"
+                  [value]="true"
+                />
+                <label class="form-check-label" for="condition2">Mới</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="condition"
+                  formControlName="condition"
+                  id="condition"
+                  [value]="false"
+                />
+                <label class="form-check-label" for="condition3">Cũ</label>
+              </div>
+            </div>
+          </div>
+          <div class="row advance-search-item">
+            <div class="col-4">
+              <p class="right-bottom">Diện tích:</p>
+            </div>
+            <div class="col-md-8">
+              <select
+                name="area"
+                formControlName="area"
+                class="custom-select"
+                id="areaSelect"
+              >
+                <option>Tất cả</option>
+              </select>
+            </div>
+          </div>
+          <div class="row advance-search-item">
+            <div class="col-4">
+              <p class="right-top">Giá:</p>
+            </div>
+            <div class="col-md-8">
+              <select
+                name="price"
+                formControlName="price"
+                class="custom-select"
+                id="priceSelect"
+              >
+                <option>Tất cả</option>
+              </select>
+              <div class="form-check form-check-inline">
+                <input
+                  formControlName="deal"
+                  class="form-check-input"
+                  type="checkbox"
+                  id="bargainPrice"
+                  value="1"
+                />
+                <label class="form-check-label" for="bargainPrice"
+                  >Giá cả có thể thỏa thuận</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row advance-search-item">
+            <div class="col-4">
+              <p class="right-bottom">Hướng:</p>
+            </div>
+            <div class="col-8">
+              <select
+                name="direction"
+                formControlName="directionId"
+                class="custom-select"
+                id="directionSelect"
+              >
+                <option>Tất cả</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Tìm kiếm
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

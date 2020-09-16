@@ -1,0 +1,81 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light"
+  style="background-color: #f3c623"
+>
+  <a class="navbar-brand" routerLink="/">
+    <img src="assets/img/logo.png" height="50" width="150" alt="logo" />
+  </a>
+  <button
+    class="navbar-toggler d-lg-none"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavId"
+    aria-controls="collapsibleNavId"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="dropdownId1"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          ><i class="fa fa-search"></i> Tìm bất động sản</a
+        >
+        <div class="dropdown-menu" aria-labelledby="dropdownId">
+          <button
+            class="dropdown-item"
+            data-toggle="modal"
+            data-target="#advanceSearchModal"
+          >
+            Tìm kiếm nâng cao
+          </button>
+          <button
+            class="dropdown-item"
+            data-toggle="modal"
+            data-target="#findByAge"
+          >
+            Tìm hướng nhà theo năm sinh
+          </button>
+          <button
+            class="dropdown-item"
+            data-toggle="modal"
+            data-target="#findByKeyword"
+          >
+            Tìm theo từ khóa
+          </button>
+        </div>
+      </li>
+      <li class="nav-item" type="button">
+        <a class="nav-link"><i class="fa fa-bullhorn"></i> Đăng tin</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/support"
+          ><i class="fa fa-phone-square"></i> Trợ giúp</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login"
+          ><i class="fa fa-user" aria-hidden="true"></i> Đăng nhập
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user"
+          ><i class="fa fa-user" aria-hidden="true"></i> nht1206
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login"
+          ><i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

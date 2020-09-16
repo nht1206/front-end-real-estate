@@ -1,0 +1,41 @@
+<div>
+  <app-navbar></app-navbar>
+  <app-advanced-search></app-advanced-search>
+  <app-search-by-age></app-search-by-age>
+  <app-search-by-keyword></app-search-by-keyword>
+
+  <div class="row px-0 mx-0">
+    <!--    left side-bar-->
+    <div class="col-2"></div>
+    <!--    content-->
+    <div class="col-sm-12 col-md-8 col-lg-8">
+      <router-outlet></router-outlet>
+    </div>
+    <!--    right side-bar-->
+    <div class="col-2"></div>
+  </div>
+
+  <ng-template let-modal #checkUser>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Đăng nhập</h4>
+      <span style="cursor: pointer" class="close" (click)="modal.dismiss()"
+        >&times;</span
+      >
+    </div>
+    <div class="modal-body">
+      <p>Vui lòng đăng nhập để tiếp tục!</p>
+      <p>
+        Đăng nhập <a routerLink="/login" (click)="modal.close()">tại đây</a>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-dark"
+        (click)="modal.close()"
+      >
+        Quay lại
+      </button>
+    </div>
+  </ng-template>
+</div>
