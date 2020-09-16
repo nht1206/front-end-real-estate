@@ -1,1 +1,70 @@
-<p>login works!</p>
+<div style="margin-top: 50px; margin-left: 150px; margin-right: 100px">
+  <div class="card">
+    <div class="card-header">
+      <h3>Đăng Nhập</h3>
+      <div class="d-flex justify-content-end social_icon">
+        <span><i class="fab fa-facebook-square"></i></span>
+        <span><i class="fab fa-google-plus-square"></i></span>
+        <span><i class="fab fa-twitter-square"></i></span>
+      </div>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" novalidate>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input
+            type="email"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': loginForm.touched && form.email.errors
+            }"
+            placeholder="Email"
+            formControlName="email"
+            autofocus="autofocus"
+          />
+          <div class="invalid-feedback">Địa chỉ email không phù hợp!</div>
+        </div>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
+          </div>
+          <input
+            type="password"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': loginForm.touched && form.password.errors
+            }"
+            placeholder="Mật khẩu"
+            formControlName="password"
+          />
+          <div class="invalid-feedback">Bạn chưa nhập mật khẩu!</div>
+        </div>
+        <div class="form-group">
+          <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+            {{ errorMessage }}
+          </div>
+        </div>
+        <div class="row align-items-center remember">
+          <input type="checkbox" />Ghi nhớ
+        </div>
+        <div class="form-group">
+          <input
+            type="submit"
+            value="Đăng nhập"
+            class="btn float-right login_btn"
+          />
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-center links">
+        Đăng kí ngay <a routerLink="/register">tại đây</a>
+      </div>
+      <div class="d-flex justify-content-center">
+        <a href="#">Quên mật khẩu?</a>
+      </div>
+    </div>
+  </div>
+</div>

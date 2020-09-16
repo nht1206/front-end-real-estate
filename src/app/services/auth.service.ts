@@ -1,5 +1,5 @@
 import { RoleName } from './../models/role-name';
-import { TokenStorageService } from './token-storage.service';
+import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -21,7 +21,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorageService: TokenStorageService
+    private storageService: StorageService
   ) {}
 
   login(credentials): Observable<any> {
@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.tokenStorageService.signOut();
+    this.storageService.signOut();
     this.userSubject.next(null);
   }
 
@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   getCurrentUser(): void {
-    if (this.tokenStorageService.getToken()) {
+    if (this.storageService.getToken()) {
       this.http.get<User>(AUTH_API + 'me', httpOptions).subscribe((user) => {
         if (user) {
           this.userSubject.next(user);
