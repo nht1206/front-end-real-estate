@@ -1,8 +1,11 @@
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { StorageService } from './../../../services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { AppState } from 'src/app/models/app-state';
+import { Login, LoadCurrentUser } from 'src/app/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +14,30 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  isLoginFailed = false;
-  errorMessage = '';
+  isAuthenticated$: Observable<boolean>;
+  errorMessage$: Observable<string>;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private storageService: StorageService,
-    private route: Router
-  ) {}
+    private router: Router,
+    private store: Store<AppState>
+  ) {
+    this.isAuthenticated$ = this.store.select(
+      (app) => app.auth.isAuthenticated
+    );
+    this.errorMessage$ = this.store.select((app) => app.auth.errorMessage);
+  }
 
   ngOnInit() {
-    if (this.storageService.getToken()) {
-      this.route.navigateByUrl('/');
-    }
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
+    });
+    this.isAuthenticated$.subscribe((isAuthenticated) => {
+      if (isAuthenticated) {
+        this.router.navigateByUrl('/');
+        this.store.dispatch(new LoadCurrentUser());
+      }
     });
   }
 
@@ -35,19 +45,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.login(this.loginForm.value).subscribe(
-      (data) => {
-        this.storageService.saveToken(data.accessToken);
-        this.storageService.saveUser(data);
-        this.authService.getCurrentUser();
-        this.isLoginFailed = false;
-        this.route.navigateByUrl('/');
-      },
-      (err) => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
-    );
+    this.store.dispatch(new Login(this.loginForm.value));
   }
 
   get form() {

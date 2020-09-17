@@ -1,3 +1,5 @@
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { TokenInterceptor } from './helpers/token.interceptor';
 import { reducers } from './reducers/index';
 import { PostEffects } from './effects/post.effects';
 import { EffectsModule } from '@ngrx/effects';
@@ -7,9 +9,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { AuthEffects } from './effects/auth.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,14 +20,25 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    EffectsModule.forRoot([PostEffects]),
+    EffectsModule.forRoot([PostEffects, AuthEffects]),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

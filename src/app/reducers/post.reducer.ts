@@ -1,5 +1,5 @@
 import { Search } from './../models/search';
-import { PostAction, PostActionTypes } from './../actions/post.action';
+import { PostActions, PostActionTypes } from './../actions/post.action';
 import { Post } from '../models/post';
 import { Page } from '../models/page';
 
@@ -29,7 +29,7 @@ const initialState: PostState = {
 
 export function PostReducer(
   state: PostState = initialState,
-  action: PostAction
+  action: PostActions
 ) {
   switch (action.type) {
     case PostActionTypes.LOAD_POST:

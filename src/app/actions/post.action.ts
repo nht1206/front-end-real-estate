@@ -78,7 +78,7 @@ export class SearchAllPostFailureAction implements Action {
   constructor(public payload: string) {}
 }
 
-export type PostAction =
+export type PostActions =
   | LoadPostAction
   | LoadPostSuccessAction
   | LoadPostFailureAction

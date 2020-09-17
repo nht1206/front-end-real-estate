@@ -60,21 +60,40 @@
           ><i class="fa fa-phone-square"></i> Trợ giúp</a
         >
       </li>
-      <li class="nav-item">
+      <li *ngIf="!user" class="nav-item">
         <a class="nav-link" routerLink="/login"
           ><i class="fa fa-user" aria-hidden="true"></i> Đăng nhập
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/user"
-          ><i class="fa fa-user" aria-hidden="true"></i> nht1206
+      <li *ngIf="user" class="nav-item">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fas fa-user"></i> {{ user.name }}
         </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login"
-          ><i class="fas fa-sign-out-alt"></i> Đăng xuất
-        </a>
+        <div
+          class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+          <a class="nav-link" routerLink="/user"
+            ><i class="fas fa-info"></i> Thông tin cá nhân</a
+          >
+          <a *ngIf="isAdmin()" class="nav-link" routerLink="/admin"
+            ><i class="fas fa-user-shield"></i> Admin</a
+          >
+          <a *ngIf="isMod()" class="nav-link" routerLink="/admin/mod"
+            ><i class="fas fa-user-shield"></i> Quản lý bài đăng
+          </a>
+          <a class="nav-link" (click)="logout()" routerLink="/login"
+            ><i class="fas fa-sign-out-alt"></i> Đăng xuất
+          </a>
+        </div>
       </li>
     </ul>
   </div>

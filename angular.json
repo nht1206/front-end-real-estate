@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "RealEstateFrontEnd"
+    }
+  },
+  "defaultProject": "RealEstateFrontEnd",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
