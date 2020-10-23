@@ -37,6 +37,8 @@ export class ListPostComponent implements OnInit {
     );
     this.searchForm = this.formBuilder.group({
       keyword: [''],
+      regionId: [null],
+      categoryId: [null],
     });
     this.jumpToPage(1);
   }

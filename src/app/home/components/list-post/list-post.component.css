@@ -45,3 +45,100 @@ p.card-title {
     transform: rotate(360deg);
   }
 }
+
+/* ------------------------------ PAGINTION BEGIN ------------------------------ */
+.c-pagination {
+  margin: 0 0 3.75rem;
+  font-size: 0;
+  text-align: center;
+}
+.c-page-item {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin: 0 2px;
+  cursor: pointer;
+}
+.c-page-item.active .c-page-link {
+  background-color: #ffb74d;
+  border-color: #ffb74d;
+  color: #fff;
+  text-decoration: none;
+}
+.c-page-item--prev svg,
+.c-page-item--next svg {
+  width: 8px;
+  height: 12px;
+}
+.c-page-item--next .c-page-link svg {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+}
+.c-page-link {
+  position: relative;
+  border-radius: 4px;
+  display: block;
+  text-align: center;
+  width: 2.625rem;
+  height: 2.625rem;
+  line-height: 2.625rem;
+  margin-left: -1px;
+  color: #2f3640;
+  text-decoration: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.c-page-link:hover,
+.c-page-link:focus,
+.c-page-link:active {
+  background-color: #ffb74d;
+  border-color: #ffb74d;
+  color: #fff;
+  text-decoration: none;
+}
+.c-page-link:hover svg path,
+.c-page-link:focus svg path,
+.c-page-link:active svg path {
+  fill: #fff;
+}
+.c-pagination .c-page-item.active + .c-page-item .c-page-link,
+.c-pagination .c-page-item:hover + .c-page-item .c-page-link {
+  border-left-color: #ffb74d;
+}
+
+@media screen and (max-width: 576px) {
+  .c-page-item {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .c-page-item.active,
+  .c-page-item:first-of-type,
+  .c-page-item:last-of-type,
+  .c-page-item:nth-of-type(2),
+  .c-page-item:nth-last-of-type(2) {
+    position: initial;
+    top: initial;
+    left: initial;
+  }
+  .c-page-item.active + li {
+    position: initial;
+    top: initial;
+    left: initial;
+  }
+}
+
+.c-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.c-page-item.c-disabled .c-page-link {
+  color: #777;
+  text-decoration: none;
+}
+
+/* ------------------------------ PAGINTION END ------------------------------ */

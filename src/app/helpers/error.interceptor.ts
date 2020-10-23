@@ -17,10 +17,11 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
     if (err.status === 401 || err.status === 403) {
+      this.authService.logout();
       this.router.navigateByUrl('login');
       return of(EMPTY);
     }
-    return throwError(err);
+    return throwError(err.error.message);
   }
 
   intercept(

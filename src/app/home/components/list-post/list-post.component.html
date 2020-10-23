@@ -13,13 +13,13 @@
       />
     </div>
     <div class="col-sm-12 col-md-6 pb-1">
-      <select name="region" class="form-control">
-        <option>--Chọn vùng miền--</option>
+      <select formControlName="regionId" name="region" class="form-control">
+        <option [value]="null">--Chọn vùng miền--</option>
       </select>
     </div>
     <div class="col-sm-12 col-md-6 pb-1">
-      <select name="category" class="form-control">
-        <option>--Chọn danh mục--</option>
+      <select formControlName="categoryId" name="category" class="form-control">
+        <option [value]="null">--Chọn danh mục--</option>
       </select>
     </div>
     <div class="col-sm-12 row justify-content-between">
@@ -121,37 +121,49 @@
   "
   class="d-flex justify-content-center"
 >
-  <ul class="pagination">
-    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.first }">
-      <span class="page-link" (click)="jumpToPage(1)">
+  <ul class="c-pagination">
+    <li
+      class="c-page-item"
+      [ngClass]="{ 'c-disabled': (posts$ | async)?.first }"
+    >
+      <span class="c-page-link" (click)="jumpToPage(1)">
         <em class="fa fa-angle-double-left"></em>
       </span>
     </li>
-    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.first }">
-      <span class="page-link" (click)="jumpToPage(pager.currentPage - 1)">
+    <li
+      class="c-page-item"
+      [ngClass]="{ 'c-disabled': (posts$ | async)?.first }"
+    >
+      <span class="c-page-link" (click)="jumpToPage(pager.currentPage - 1)">
         <em class="fa fa-angle-left"></em>
       </span>
     </li>
-    <li class="page-item" *ngIf="pager.startPage > 1">
-      <a class="page-link">...</a>
+    <li class="c-page-item" *ngIf="pager.startPage > 1">
+      <a class="c-page-link">...</a>
     </li>
     <li
       *ngFor="let page of pager.pages"
-      class="page-item"
+      class="c-page-item"
       [class.active]="(posts$ | async)?.number === page - 1"
     >
-      <span class="page-link" (click)="jumpToPage(page)">{{ page }}</span>
+      <span class="c-page-link" (click)="jumpToPage(page)">{{ page }}</span>
     </li>
-    <li class="page-item" *ngIf="pager.endPage < (posts$ | async).totalPages">
-      <a class="page-link">...</a>
+    <li class="c-page-item" *ngIf="pager.endPage < (posts$ | async).totalPages">
+      <a class="c-page-link">...</a>
     </li>
-    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.last }">
-      <span class="page-link" (click)="jumpToPage(pager.currentPage + 1)">
+    <li
+      class="c-page-item"
+      [ngClass]="{ 'c-disabled': (posts$ | async)?.last }"
+    >
+      <span class="c-page-link" (click)="jumpToPage(pager.currentPage + 1)">
         <em class="fa fa-angle-right"></em>
       </span>
     </li>
-    <li class="page-item" [ngClass]="{ disabled: (posts$ | async)?.last }">
-      <span class="page-link" (click)="jumpToPage(pager.totalPages)">
+    <li
+      class="c-page-item"
+      [ngClass]="{ 'c-disabled': (posts$ | async)?.last }"
+    >
+      <span class="c-page-link" (click)="jumpToPage(pager.totalPages)">
         <em class="fa fa-angle-double-right"></em>
       </span>
     </li>
