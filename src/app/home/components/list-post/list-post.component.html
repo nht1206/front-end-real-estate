@@ -15,11 +15,20 @@
     <div class="col-sm-12 col-md-6 pb-1">
       <select formControlName="regionId" name="region" class="form-control">
         <option [value]="null">--Chọn vùng miền--</option>
+        <option *ngFor="let region of regions$ | async" [value]="region.id">
+          {{ region.name }}
+        </option>
       </select>
     </div>
     <div class="col-sm-12 col-md-6 pb-1">
       <select formControlName="categoryId" name="category" class="form-control">
         <option [value]="null">--Chọn danh mục--</option>
+        <option
+          *ngFor="let category of categories$ | async"
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </option>
       </select>
     </div>
     <div class="col-sm-12 row justify-content-between">
@@ -27,7 +36,7 @@
         <h5>Tất cả Cá nhân/Tổ chức.</h5>
       </div>
       <button class="btn btn-warning col-lg-2 col-sm-4">
-        <i class="fa fa-search"></i> Tìm kiếm
+        <em class="fa fa-search"></em> Tìm kiếm
       </button>
     </div>
   </div>
@@ -91,14 +100,14 @@
           <div class="post-info">
             <div style="height: 26px">
               <div *ngIf="post.region !== null">
-                <i class="fas fa-map-marker-alt"></i> tại
+                <em class="fas fa-map-marker-alt"></em> tại
                 {{ post?.region.name }}
               </div>
             </div>
             <div>Ngày đăng: {{ post.createdAt | date: "dd/MM/yyyy" }}</div>
             <div>
               <span>
-                <i class="fas fa-eye"></i> Lượt xem {{ post.viewCount }}
+                <em class="fas fa-eye"></em> Lượt xem {{ post.viewCount }}
               </span>
               <label class="float-right" *ngIf="post.customerType"
                 >Cá nhân</label

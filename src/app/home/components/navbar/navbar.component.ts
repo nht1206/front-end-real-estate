@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { RoleName } from 'src/app/models/role-name';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { LoadCurrentUser } from 'src/app/actions/auth.actions';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private storageService: StorageService,
     private store: Store<AppState>
   ) {
     this.user$ = store.select((app) => app.auth.user);
@@ -29,11 +29,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAuthenticated$.subscribe((isAuthenticated) => {
-      if (isAuthenticated) {
-        this.store.dispatch(new LoadCurrentUser());
-      }
-    });
+    const token = this.storageService.getToken();
+    if (token != null) {
+      this.store.dispatch(new LoadCurrentUser());
+    }
     this.user$.subscribe(
       (user) => {
         this.user = user;

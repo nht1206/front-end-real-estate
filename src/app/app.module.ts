@@ -1,3 +1,5 @@
+import { CategoryEffects } from './effects/category.effects';
+import { RegionEffects } from './effects/region.effects';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { TokenInterceptor } from './helpers/token.interceptor';
 import { reducers } from './reducers/index';
@@ -20,7 +22,12 @@ import { AuthEffects } from './effects/auth.effects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    EffectsModule.forRoot([PostEffects, AuthEffects]),
+    EffectsModule.forRoot([
+      PostEffects,
+      AuthEffects,
+      RegionEffects,
+      CategoryEffects,
+    ]),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

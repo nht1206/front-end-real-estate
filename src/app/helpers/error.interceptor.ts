@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       this.router.navigateByUrl('login');
       return of(EMPTY);
     }
-    return throwError(err.error.message);
+    return throwError(err);
   }
 
   intercept(

@@ -25,7 +25,7 @@ export class AuthEffects {
           new LoginSuccess(data.token),
           new LoadCurrentUser(),
         ]),
-        catchError((err) => of(new LoginFailure(err)))
+        catchError((err) => of(new LoginFailure(err.error.message)))
       )
     )
   );

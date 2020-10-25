@@ -1,3 +1,7 @@
+import { LoadCategoryAction } from './../../../actions/category.action';
+import { Category } from './../../../models/category';
+import { LoadRegionAction } from './../../../actions/region.action';
+import { Region } from './../../../models/region';
 import { PagerService } from './../../../services/pager.service';
 import { SearchAllPostAction } from './../../../actions/post.action';
 import { Component, OnInit } from '@angular/core';
@@ -16,12 +20,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ListPostComponent implements OnInit {
   posts$: Observable<Page<Post>>;
+  regions$: Observable<Array<Region>>;
+  categories$: Observable<Array<Category>>;
   loading$: Observable<boolean>;
   error$: Observable<Error>;
   currentOption$: Observable<Search>;
   pager: any;
   searchForm: FormGroup;
-
   constructor(
     private store: Store<AppState>,
     private pagerService: PagerService,
@@ -32,6 +37,8 @@ export class ListPostComponent implements OnInit {
     this.posts$ = this.store.select((store) => store.post.list);
     this.loading$ = this.store.select((store) => store.post.loading);
     this.error$ = this.store.select((store) => store.post.error);
+    this.regions$ = this.store.select((store) => store.region.list);
+    this.categories$ = this.store.select((store) => store.category.list);
     this.currentOption$ = this.store.select(
       (store) => store.post.currentOption
     );
@@ -41,11 +48,15 @@ export class ListPostComponent implements OnInit {
       categoryId: [null],
     });
     this.jumpToPage(1);
+    this.store.dispatch(new LoadRegionAction());
+    this.store.dispatch(new LoadCategoryAction());
   }
 
   handleSearch() {
     const option: Search = new Search();
     option.keyword = this.searchForm.value.keyword;
+    option.regionId = this.searchForm.value.regionId;
+    option.categoryId = this.searchForm.value.categoryId;
     this.store.dispatch(new SearchAllPostAction(option, 0));
   }
 
