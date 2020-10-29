@@ -22,9 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private store: Store<AppState>
   ) {
-    this.isAuthenticated$ = this.store.select(
-      (app) => app.auth.isAuthenticated
-    );
+    this.isAuthenticated$ = store.select((app) => app.auth.isAuthenticated);
     this.errorMessage$ = this.store.select((app) => app.auth.errorMessage);
   }
 
@@ -36,7 +34,6 @@ export class LoginComponent implements OnInit {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
       if (isAuthenticated) {
         this.router.navigateByUrl('/');
-        this.store.dispatch(new LoadCurrentUser());
       }
     });
   }

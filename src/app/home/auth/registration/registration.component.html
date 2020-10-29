@@ -1,91 +1,114 @@
-<form
-  *ngIf="!isSuccessful"
-  (ngSubmit)="onSubmit()"
-  novalidate
-  [formGroup]="registerForm"
->
-  <div class="card">
-    <div class="card-header">
-      <h3>Đăng Ký</h3>
-    </div>
-    <div class="card-body">
-      <div class="form-group">
-        <label for="name"></label>
-        <div>
-          <input
-            type="text"
-            id="name"
-            class="form-control"
-            placeholder="Họ và Tên"
-            formControlName="name"
-          />
+<div class="row justify-content-center">
+  <form
+    (ngSubmit)="onSubmit()"
+    novalidate
+    [formGroup]="registerForm"
+    class="col-md-8"
+  >
+    <div class="card">
+      <div class="card-header">
+        <h3>Đăng Ký</h3>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="name"></label>
+          <div>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder="Họ và Tên"
+              formControlName="name"
+              autofocus
+              [ngClass]="{
+                'is-invalid': form.name.touched && form.name.errors
+              }"
+            />
+            <div class="invalid-feedback">Tên không hợp lệ!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email"></label>
+          <div>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              name="email"
+              placeholder="Email"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid': form.email.touched && form.email.errors
+              }"
+            />
+            <div class="invalid-feedback">Địa chỉ email không hợp lệ!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address"></label>
+          <div>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              placeholder="Địa chỉ"
+              formControlName="address"
+              [ngClass]="{
+                'is-invalid': form.address.touched && form.address.errors
+              }"
+            />
+            <div class="invalid-feedback">Địa chỉ không hợp lệ!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber"></label>
+          <div>
+            <input
+              type="phoneNumber"
+              id="phoneNumber"
+              class="form-control"
+              placeholder="Số điện thoại"
+              formControlName="phoneNumber"
+              [ngClass]="{
+                'is-invalid':
+                  form.phoneNumber.touched && form.phoneNumber.errors
+              }"
+            />
+            <div class="invalid-feedback">Số điện thoại không hợp lệ!</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password"></label>
+          <div>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Mật Khẩu"
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid': form.password.touched && form.password.errors
+              }"
+            />
+            <div class="invalid-feedback">Mật khẩu phải dài hơn 6 ký tự!</div>
+          </div>
+        </div>
+        <div class="alert alert-success" *ngIf="isSuccessful">
+          Your registration is successful!
+        </div>
+        <div class="alert alert-danger" *ngIf="isSignUpFailed">
+          {{ errorMessage }}
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn login_btn">Đăng ký</button>
         </div>
       </div>
-      <div class="form-group">
-        <label for="email"></label>
-        <div>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            name="email"
-            placeholder="Email"
-            formControlName="email"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="address"></label>
-        <div>
-          <input
-            type="text"
-            id="address"
-            class="form-control"
-            placeholder="Địa chỉ"
-            formControlName="address"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="phoneNumber"></label>
-        <div>
-          <input
-            type="phoneNumber"
-            id="phoneNumber"
-            class="form-control"
-            placeholder="Số điện thoại"
-            formControlName="phoneNumber"
-          />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password"></label>
-        <div>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            placeholder="Mật Khẩu"
-            formControlName="password"
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn login_btn">Đăng ký</button>
-      </div>
-    </div>
 
-    <div class="card-footer">
-      <div class="d-flex justify-content-center links">
-        Đăng nhập ngay<a routerLink="/login">tại đây</a>
+      <div class="card-footer">
+        <div class="d-flex justify-content-center links">
+          Đăng nhập ngay <a routerLink="/login">tại đây</a>
+        </div>
       </div>
     </div>
-  </div>
-</form>
-
-<div class="alert alert-success" *ngIf="isSuccessful">
-  Your registration is successful!
+  </form>
 </div>
-
-<!--    </form> &lt;!&ndash; /form &ndash;&gt;-->
-<!-- ./container -->
