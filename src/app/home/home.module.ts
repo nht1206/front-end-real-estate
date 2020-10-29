@@ -11,6 +11,9 @@ import { AdvancedSearchComponent } from './components/advanced-search/advanced-s
 import { SearchByKeywordComponent } from './components/search-by-keyword/search-by-keyword.component';
 import { SearchByAgeComponent } from './components/search-by-age/search-by-age.component';
 import { ListPostComponent } from './components/list-post/list-post.component';
+import { PostingFormComponent } from './components/posting/posting-form/posting-form.component';
+import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { ListPostComponent } from './components/list-post/list-post.component';
     SearchByKeywordComponent,
     SearchByAgeComponent,
     ListPostComponent,
+    PostingFormComponent,
+    PostingConfirmComponent,
+    PostDetailComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
 })

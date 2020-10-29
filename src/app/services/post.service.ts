@@ -30,13 +30,13 @@ export class PostService {
   }
 
   getPostById(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.API}/${id}`);
+    return this.http.get<Post>(`${this.API}/${id}`).pipe(delay(500));
   }
 
   getPostsByUserId(page = 0, userId: number): Observable<Page<Post>> {
-    return this.http.get<Page<Post>>(
-      this.API + '/user/' + userId + '?page=' + page
-    );
+    return this.http
+      .get<Page<Post>>(this.API + '/user/' + userId + '?page=' + page)
+      .pipe(delay(500));
   }
 
   getPostsByViewCount(): Observable<Array<Post>> {

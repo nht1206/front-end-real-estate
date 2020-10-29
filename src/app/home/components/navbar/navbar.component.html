@@ -3,7 +3,7 @@
   style="background-color: #f3c623"
 >
   <a class="navbar-brand" routerLink="/">
-    <img src="assets/img/logo.png" height="50" width="150" alt="logo" />
+    <img src="assets/img/logo.png" height="40" width="120" alt="logo" />
   </a>
   <button
     class="navbar-toggler d-lg-none"
@@ -17,7 +17,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"
@@ -53,7 +53,9 @@
         </div>
       </li>
       <li class="nav-item" type="button">
-        <a class="nav-link"><i class="fa fa-bullhorn"></i> Đăng tin</a>
+        <a class="nav-link" routerLink="/posting"
+          ><i class="fa fa-bullhorn"></i> Đăng tin</a
+        >
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/support"

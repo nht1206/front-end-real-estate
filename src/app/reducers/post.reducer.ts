@@ -8,6 +8,7 @@ export interface PostState {
   loading: boolean;
   error: Error;
   currentOption: Search;
+  currentPost: Post;
 }
 
 const initialState: PostState = {
@@ -25,6 +26,7 @@ const initialState: PostState = {
   loading: false,
   error: undefined,
   currentOption: new Search(),
+  currentPost: null,
 };
 
 export function PostReducer(
@@ -51,6 +53,12 @@ export function PostReducer(
     case PostActionTypes.SEARCH_ALL_POST_SUCCESS:
       return { ...state, list: action.payload, loading: false };
     case PostActionTypes.SEARCH_ALL_POST_FAILURE:
+      return { ...state, error: action.payload, loading: false };
+    case PostActionTypes.GET_POST_BY_ID:
+      return { ...state, loading: true };
+    case PostActionTypes.GET_POST_BY_ID_SUCCESS:
+      return { ...state, currentPost: action.payload, loading: false };
+    case PostActionTypes.ADD_POST_FAILURE:
       return { ...state, error: action.payload, loading: false };
     default:
       return state;

@@ -29,10 +29,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const token = this.storageService.getToken();
-    if (token != null) {
-      this.store.dispatch(new LoadCurrentUser());
-    }
     this.user$.subscribe(
       (user) => {
         this.user = user;

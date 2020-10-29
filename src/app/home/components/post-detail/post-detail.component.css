@@ -1,0 +1,46 @@
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+.edit-cmt {
+  display: flex;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 4px 0 9px 10px;
+  color: #385898;
+}
+
+.edit-cmt:hover {
+  text-decoration: underline;
+}
+
+.email-cmt {
+  font-weight: bold;
+  color: #385898;
+  font-size: 16px;
+}
+
+.date-cmt {
+  font-style: italic;
+  font-size: 13px;
+  font-weight: normal;
+  color: #999;
+  margin: 4px 0 9px 10px;
+}
+
+.content p {
+  border-left-style: solid;
+  border-left-color: rgb(226, 72, 15);
+  padding: 10px;
+  box-shadow: 3px 5px #888888;
+}

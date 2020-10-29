@@ -31,17 +31,16 @@ export class ListPostComponent implements OnInit {
     private store: Store<AppState>,
     private pagerService: PagerService,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    this.posts$ = store.select((app) => app.post.list);
+    this.loading$ = store.select((app) => app.post.loading);
+    this.error$ = store.select((app) => app.post.error);
+    this.regions$ = store.select((app) => app.region.list);
+    this.categories$ = store.select((app) => app.category.list);
+    this.currentOption$ = store.select((app) => app.post.currentOption);
+  }
 
   ngOnInit(): void {
-    this.posts$ = this.store.select((store) => store.post.list);
-    this.loading$ = this.store.select((store) => store.post.loading);
-    this.error$ = this.store.select((store) => store.post.error);
-    this.regions$ = this.store.select((store) => store.region.list);
-    this.categories$ = this.store.select((store) => store.category.list);
-    this.currentOption$ = this.store.select(
-      (store) => store.post.currentOption
-    );
     this.searchForm = this.formBuilder.group({
       keyword: [''],
       regionId: [null],

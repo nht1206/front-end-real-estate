@@ -16,6 +16,10 @@ export enum PostActionTypes {
   SEARCH_ALL_POST = '[Post] Search All Post',
   SEARCH_ALL_POST_SUCCESS = '[Post] Search All Post Success',
   SEARCH_ALL_POST_FAILURE = '[Post] Search All Post Failure',
+  GET_POST_BY_ID = '[Post] Get Post By Id',
+  GET_POST_BY_ID_SUCCESS = '[Post] Get Post By Id Success',
+  GET_POST_BY_ID_FAILURE = '[Post] Get Post By Id Failure',
+  UPDATE_POST_VIEW_COUNT = '[Post] Update Post View Count',
 }
 
 export class LoadPostAction implements Action {
@@ -78,6 +82,26 @@ export class SearchAllPostFailureAction implements Action {
   constructor(public payload: string) {}
 }
 
+export class GetPostById implements Action {
+  readonly type = PostActionTypes.GET_POST_BY_ID;
+  constructor(public payload: string) {}
+}
+
+export class GetPostByIdSuccess implements Action {
+  readonly type = PostActionTypes.GET_POST_BY_ID_SUCCESS;
+  constructor(public payload: Post) {}
+}
+
+export class GetPostByIdFailure implements Action {
+  readonly type = PostActionTypes.GET_POST_BY_ID_FAILURE;
+  constructor(public payload: string) {}
+}
+
+export class UpdatePostViewCount implements Action {
+  readonly type = PostActionTypes.UPDATE_POST_VIEW_COUNT;
+  constructor(public payload: string) {}
+}
+
 export type PostActions =
   | LoadPostAction
   | LoadPostSuccessAction
@@ -88,4 +112,8 @@ export type PostActions =
   | DeletePostFailureAction
   | SearchAllPostAction
   | SearchAllPostSuccessAction
-  | SearchAllPostFailureAction;
+  | SearchAllPostFailureAction
+  | GetPostById
+  | GetPostByIdSuccess
+  | GetPostByIdFailure
+  | UpdatePostViewCount;
