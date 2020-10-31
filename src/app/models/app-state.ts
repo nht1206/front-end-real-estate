@@ -1,3 +1,4 @@
+import { DirectionState } from './../reducers/direction.reducer';
 import { CategoryState } from './../reducers/category.reducer';
 import { RegionState } from './../reducers/region.reducer';
 import { AuthState } from './../reducers/auth.reducer';
@@ -7,4 +8,5 @@ export interface AppState {
   readonly auth: AuthState;
   readonly region: RegionState;
   readonly category: CategoryState;
+  readonly direction: DirectionState;
 }

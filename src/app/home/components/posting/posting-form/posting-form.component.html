@@ -28,7 +28,11 @@
     </div>
     <hr style="background-color: black" />
   </div>
-  <form class="col-md-12 px-5" [formGroup]="postingForm">
+  <form
+    class="col-md-12 px-5"
+    [formGroup]="postingForm"
+    (ngSubmit)="submitForm()"
+  >
     <div class="form-group row">
       <label class="col-sm-3 col-form-label" for="category">Danh Mục:</label>
       <div class="col-sm-9">
@@ -59,7 +63,7 @@
           <input
             class="form-check-input"
             type="radio"
-            formControlName="customerType"
+            formControlName="userType"
             id="personal"
             [value]="true"
           />
@@ -69,7 +73,7 @@
           <input
             class="form-check-input"
             type="radio"
-            formControlName="customerType"
+            formControlName="userType"
             id="company"
             [value]="false"
           />
@@ -210,7 +214,12 @@
           id="directions"
           formControlName="direction"
         >
-          <option [ngValue]="null">-- Chọn hướng --</option>
+          <option
+            *ngFor="let direction of direction$ | async"
+            [ngValue]="direction"
+          >
+            {{ direction.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -355,12 +364,16 @@
     </div> -->
     <div class="row d-flex justify-content-center" id="button-post">
       <div class="col-3">
-        <button class="btn btn-warning btn-block" type="button">
+        <button class="btn btn-warning btn-block" routerLink="/" type="button">
           <em class="fa fa-chevron-left"></em> Quay lại
         </button>
       </div>
       <div class="col-3">
-        <button class="btn btn-info btn-block" type="submit">
+        <button
+          class="btn btn-info btn-block"
+          [disabled]="postingForm.invalid"
+          type="submit"
+        >
           <em class="fa fa-check"></em> Đăng tin
         </button>
       </div>

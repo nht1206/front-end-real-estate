@@ -1,3 +1,4 @@
+import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { ListPostComponent } from './components/list-post/list-post.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'posting',
         component: PostingFormComponent,
+      },
+      {
+        path: 'confirm',
+        component: PostingConfirmComponent,
       },
       {
         path: 'post-detail/:id',

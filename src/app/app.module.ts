@@ -1,3 +1,4 @@
+import { DirectionEffects } from './effects/direction.effects';
 import { CategoryEffects } from './effects/category.effects';
 import { RegionEffects } from './effects/region.effects';
 import { ErrorInterceptor } from './helpers/error.interceptor';
@@ -30,6 +31,7 @@ import { AdvancedSearchComponent } from './home/components/advanced-search/advan
       AuthEffects,
       RegionEffects,
       CategoryEffects,
+      DirectionEffects,
     ]),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({

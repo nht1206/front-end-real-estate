@@ -25,5 +25,5 @@ export interface Post {
   direction: Direction;
   createdAt: Date;
   updatedAt: Date;
-  customerType: boolean;
+  userType: boolean;
 }

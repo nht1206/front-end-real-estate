@@ -1,0 +1,185 @@
+<div class="container-fluid px-5">
+  <form class="col-md-12 ml-auto" [formGroup] style="background: white">
+    <div id="title-post-confirm">
+      <h3
+        class="col-sm-12"
+        style="
+          font-family: 'Times New Roman';
+          font-size: 24px;
+          font-weight: bold;
+          padding: 5px;
+        "
+      >
+        Nội dung tin
+      </h3>
+      <hr style="background-color: black" />
+    </div>
+    <div class="col-sm-11 ml-auto">
+      <div
+        class="form-group row"
+        *ngIf="(currentPostingPost$ | async).category !== null"
+      >
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Danh Mục:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).category.name }}</label>
+        </div>
+      </div>
+      <div
+        class="form-group row"
+        *ngIf="(currentPostingPost$ | async).region !== null"
+      >
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Vùng Miền:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).region.name }}</label>
+        </div>
+      </div>
+      <div
+        class="form-group row"
+        *ngIf="(currentPostingPost$ | async).userType !== null"
+      >
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Bạn Là:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label *ngIf="(currentPostingPost$ | async).userType">Cá Nhân</label>
+          <label *ngIf="!(currentPostingPost$ | async).userType">Công ty</label>
+        </div>
+      </div>
+      <div
+        class="form-group row"
+        *ngIf="(currentPostingPost$ | async).direction !== null"
+      >
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Hướng:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).direction.name }}</label>
+        </div>
+      </div>
+      <div
+        class="form-group row"
+        *ngIf="(currentPostingPost$ | async).postType !== null"
+      >
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Loại bài đăng:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).postType.name }}</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Tiêu đề:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).title }}</label>
+        </div>
+      </div>
+      <div
+        class="form-group row"
+        *ngIf="(currentPostingPost$ | async).condition !== null"
+      >
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Tình trạng:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label *ngIf="(currentPostingPost$ | async).condition">Mới</label>
+          <label *ngIf="!(currentPostingPost$ | async).condition"
+            >Đã sử dụng</label
+          >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Địa chỉ:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).address }}</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Diện tích:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).area }} m<sup>2</sup></label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Giá:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).price | number }} VNĐ</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Nội dung:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <label>{{ (currentPostingPost$ | async).content }}</label>
+        </div>
+      </div>
+      <!-- <div class="form-group row" *ngIf="listImages.length !== 0">
+        <label class="col-sm-3 col-form-label" style="font-weight: bold"
+          >Hình ảnh:</label
+        >
+        <div class="col-sm-9 col-form-label">
+          <div class="row">
+            <div *ngFor="let image of listImages" class="flex-column m-1">
+              <img [src]="image" height="130" width="150" />
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="row d-flex justify-content-center" id="button-post-confirm">
+        <div class="col-3">
+          <button
+            type="button"
+            routerLink="/posting"
+            class="btn btn-warning btn-block"
+          >
+            <i class="fa fa-chevron-left"></i> Quay lại
+          </button>
+        </div>
+        <div class="col-3">
+          <button type="button" class="btn btn-info btn-block">
+            <i class="fa fa-check"></i> Xác nhận
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->
+<ng-template let-modal #messageModal>
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title" id="messageModalLabel" style="color: white">
+      Thông báo!
+    </h5>
+  </div>
+  <div class="modal-body">
+    <label>
+      Bài viết của bạn đã được gửi đến quản trị viên! <br />
+      Chúng tôi sẽ duyệt bài viết của bạn trong thời gian ngắn nhất.<br />
+      Chân thành cảm ơn!
+    </label>
+  </div>
+  <div class="modal-footer">
+    <div class="col-sm-6 ml-auto">
+      <button
+        type="button"
+        class="btn btn-warning btn-block"
+        data-dismiss="modal"
+      >
+        <i class="fa fa-chevron-left"> Quay lại trang chủ </i>
+      </button>
+    </div>
+  </div>
+</ng-template>

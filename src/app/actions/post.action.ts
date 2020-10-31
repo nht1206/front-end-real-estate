@@ -20,6 +20,10 @@ export enum PostActionTypes {
   GET_POST_BY_ID_SUCCESS = '[Post] Get Post By Id Success',
   GET_POST_BY_ID_FAILURE = '[Post] Get Post By Id Failure',
   UPDATE_POST_VIEW_COUNT = '[Post] Update Post View Count',
+  SUBMIT_POSTING_FORM = '[Post] Submit Posting Form',
+  POSTING = '[Post] Posting',
+  POSTING_SUCCESS = '[Post] Posting Success',
+  POSTING_FAILURE = '[Post] Posting Failure',
 }
 
 export class LoadPostAction implements Action {
@@ -102,6 +106,26 @@ export class UpdatePostViewCount implements Action {
   constructor(public payload: string) {}
 }
 
+export class SubmitPostingForm implements Action {
+  readonly type = PostActionTypes.SUBMIT_POSTING_FORM;
+  constructor(public payload: Post) {}
+}
+
+export class Posting implements Action {
+  readonly type = PostActionTypes.POSTING;
+  constructor(public payload: Post) {}
+}
+
+export class PostingSuccess implements Action {
+  readonly type = PostActionTypes.POSTING_SUCCESS;
+  constructor(public payload: Post) {}
+}
+
+export class PostingFailure implements Action {
+  readonly type = PostActionTypes.POSTING_FAILURE;
+  constructor(public payload: Post) {}
+}
+
 export type PostActions =
   | LoadPostAction
   | LoadPostSuccessAction
@@ -116,4 +140,8 @@ export type PostActions =
   | GetPostById
   | GetPostByIdSuccess
   | GetPostByIdFailure
-  | UpdatePostViewCount;
+  | UpdatePostViewCount
+  | SubmitPostingForm
+  | Posting
+  | PostingSuccess
+  | PostingFailure;
