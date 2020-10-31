@@ -15,7 +15,9 @@ import { Login, LoadCurrentUser } from 'src/app/actions/auth.actions';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isAuthenticated$: Observable<boolean>;
+  loading$: Observable<boolean>;
   errorMessage$: Observable<string>;
+  successMessage$: Observable<string>;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +25,9 @@ export class LoginComponent implements OnInit {
     private store: Store<AppState>
   ) {
     this.isAuthenticated$ = store.select((app) => app.auth.isAuthenticated);
-    this.errorMessage$ = this.store.select((app) => app.auth.errorMessage);
+    this.errorMessage$ = store.select((app) => app.auth.errorMessage);
+    this.successMessage$ = store.select((app) => app.auth.successMessage);
+    this.loading$ = store.select((app) => app.auth.isLoading);
   }
 
   ngOnInit() {

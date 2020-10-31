@@ -10,13 +10,37 @@ import {
   LoadCurrentUserSuccess,
   LoadCurrentUserFailure,
   Logout,
+  Register,
+  RegisterSuccess,
+  RegisterFailure,
 } from './../actions/auth.actions';
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
+  @Effect() register$ = this.actions$.pipe(
+    ofType<Register>(AuthActionTypes.REGISTER),
+    mergeMap((action) =>
+      this.authService.register(action.payload).pipe(
+        map((res) => new RegisterSuccess(res.message)),
+        catchError((err) => of(new RegisterFailure(err.error.message)))
+      )
+    )
+  );
+
+  registerSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<RegisterSuccess>(AuthActionTypes.REGISTER_SUCCESS),
+        tap((action) => {
+          this.router.navigateByUrl('/login');
+        })
+      ),
+    { dispatch: false }
+  );
+
   @Effect() login$ = this.actions$.pipe(
     ofType<Login>(AuthActionTypes.LOGIN),
     switchMap((action) =>

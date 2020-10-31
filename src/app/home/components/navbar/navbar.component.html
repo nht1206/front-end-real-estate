@@ -29,31 +29,13 @@
           ><i class="fa fa-search"></i> Tìm bất động sản</a
         >
         <div class="dropdown-menu" aria-labelledby="dropdownId">
-          <button
-            class="dropdown-item"
-            data-toggle="modal"
-            data-target="#advanceSearchModal"
-          >
-            Tìm kiếm nâng cao
-          </button>
-          <button
-            class="dropdown-item"
-            data-toggle="modal"
-            data-target="#findByAge"
-          >
-            Tìm hướng nhà theo năm sinh
-          </button>
-          <button
-            class="dropdown-item"
-            data-toggle="modal"
-            data-target="#findByKeyword"
-          >
-            Tìm theo từ khóa
-          </button>
+          <button class="dropdown-item">Tìm kiếm nâng cao</button>
+          <button class="dropdown-item">Tìm hướng nhà theo năm sinh</button>
+          <button class="dropdown-item">Tìm theo từ khóa</button>
         </div>
       </li>
       <li class="nav-item" type="button">
-        <a class="nav-link" routerLink="/posting"
+        <a class="nav-link" (click)="goToPostingForm(checkLogin)"
           ><i class="fa fa-bullhorn"></i> Đăng tin</a
         >
       </li>
@@ -100,3 +82,26 @@
     </ul>
   </div>
 </nav>
+<ng-template let-modal #checkLogin>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Chức năng này cần đăng nhập
+    </h4>
+    <span style="cursor: pointer" class="close" (click)="modal.dismiss()"
+      >&times;</span
+    >
+  </div>
+  <div class="modal-body">
+    <p>Vui lòng đăng nhập để tiếp tục!</p>
+    <p>Đăng nhập <a routerLink="/login" (click)="modal.close()">tại đây</a></p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-dark"
+      (click)="modal.close()"
+    >
+      Quay lại
+    </button>
+  </div>
+</ng-template>

@@ -27,59 +27,61 @@ export class PostEffects {
   constructor(private actions$: Actions, private postService: PostService) {}
   @Effect() loadPost$ = this.actions$.pipe(
     ofType<LoadPostAction>(PostActionTypes.LOAD_POST),
-    mergeMap((data) =>
-      this.postService.getPosts(data.payload).pipe(
+    mergeMap((action) =>
+      this.postService.getPosts(action.payload).pipe(
         map((posts) => new LoadPostSuccessAction(posts)),
-        catchError((err) => of(new LoadPostFailureAction(err)))
+        catchError((err) => of(new LoadPostFailureAction(err.error.message)))
       )
     )
   );
 
   @Effect() addPost$ = this.actions$.pipe(
     ofType<AddPostAction>(PostActionTypes.ADD_POST),
-    mergeMap((data) =>
-      this.postService.addPost(data.payload).pipe(
+    mergeMap((action) =>
+      this.postService.addPost(action.payload).pipe(
         map(() => new LoadPostAction(0)),
-        catchError((err) => of(new AddPostFailureAction(err)))
+        catchError((err) => of(new AddPostFailureAction(err.error.message)))
       )
     )
   );
   @Effect() deletePost$ = this.actions$.pipe(
     ofType<DeletePostAction>(PostActionTypes.DELETE_POST),
-    mergeMap((data) =>
-      this.postService.deletePost(data.payload).pipe(
+    mergeMap((action) =>
+      this.postService.deletePost(action.payload).pipe(
         map(() => new LoadPostAction(0)),
-        catchError((err) => of(new DeletePostFailureAction(err)))
+        catchError((err) => of(new DeletePostFailureAction(err.error.message)))
       )
     )
   );
 
   @Effect() searchAllPost$ = this.actions$.pipe(
     ofType<SearchAllPostAction>(PostActionTypes.SEARCH_ALL_POST),
-    mergeMap((data) =>
-      this.postService.searchAll(data.payload, data.page).pipe(
+    mergeMap((action) =>
+      this.postService.searchAll(action.payload, action.page).pipe(
         map((posts) => new SearchAllPostSuccessAction(posts)),
-        catchError((err) => of(new SearchAllPostFailureAction(err)))
+        catchError((err) =>
+          of(new SearchAllPostFailureAction(err.error.message))
+        )
       )
     )
   );
 
   @Effect() getPostById$ = this.actions$.pipe(
     ofType<GetPostById>(PostActionTypes.GET_POST_BY_ID),
-    mergeMap((data) =>
-      this.postService.getPostById(parseInt(data.payload, 10)).pipe(
+    mergeMap((action) =>
+      this.postService.getPostById(parseInt(action.payload, 10)).pipe(
         map((post) => new GetPostByIdSuccess(post)),
-        catchError((err) => of(new GetPostByIdFailure(err)))
+        catchError((err) => of(new GetPostByIdFailure(err.error.message)))
       )
     )
   );
 
   @Effect() updatePostViewCount$ = this.actions$.pipe(
     ofType<UpdatePostViewCount>(PostActionTypes.UPDATE_POST_VIEW_COUNT),
-    mergeMap((data) =>
+    mergeMap((action) =>
       this.postService
-        .updatePostViewCount(parseInt(data.payload, 10))
-        .pipe(map(() => new GetPostById(data.payload)))
+        .updatePostViewCount(parseInt(action.payload, 10))
+        .pipe(map(() => new GetPostById(action.payload)))
     )
   );
 }

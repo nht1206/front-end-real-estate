@@ -10,14 +10,15 @@
         <h3>Đăng Ký</h3>
       </div>
       <div class="card-body">
+        <app-loading [loading]="loading$ | async"></app-loading>
         <div class="form-group">
-          <label for="name"></label>
+          <label for="name">Họ và tên</label>
           <div>
             <input
               type="text"
               id="name"
               class="form-control"
-              placeholder="Họ và Tên"
+              placeholder="Nhập vào họ và tên"
               formControlName="name"
               autofocus
               [ngClass]="{
@@ -28,14 +29,14 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="email"></label>
+          <label for="email">Email</label>
           <div>
             <input
               type="email"
               id="email"
               class="form-control"
               name="email"
-              placeholder="Email"
+              placeholder="Nhập vào email"
               formControlName="email"
               [ngClass]="{
                 'is-invalid': form.email.touched && form.email.errors
@@ -45,13 +46,13 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="address"></label>
+          <label for="address">Địa chỉ</label>
           <div>
             <input
               type="text"
               id="address"
               class="form-control"
-              placeholder="Địa chỉ"
+              placeholder="Nhập vào địa chỉ"
               formControlName="address"
               [ngClass]="{
                 'is-invalid': form.address.touched && form.address.errors
@@ -61,13 +62,13 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="phoneNumber"></label>
+          <label for="phoneNumber">Số điện thoại</label>
           <div>
             <input
               type="phoneNumber"
               id="phoneNumber"
               class="form-control"
-              placeholder="Số điện thoại"
+              placeholder="Nhập vào số điện thoại"
               formControlName="phoneNumber"
               [ngClass]="{
                 'is-invalid':
@@ -78,13 +79,13 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="password"></label>
+          <label for="password">Mật khẩu</label>
           <div>
             <input
               type="password"
               id="password"
               class="form-control"
-              placeholder="Mật Khẩu"
+              placeholder="Nhập vào mật khẩu"
               formControlName="password"
               [ngClass]="{
                 'is-invalid': form.password.touched && form.password.errors
@@ -93,11 +94,9 @@
             <div class="invalid-feedback">Mật khẩu phải dài hơn 6 ký tự!</div>
           </div>
         </div>
-        <div class="alert alert-success" *ngIf="isSuccessful">
-          Your registration is successful!
-        </div>
-        <div class="alert alert-danger" *ngIf="isSignUpFailed">
-          {{ errorMessage }}
+
+        <div class="alert alert-danger" *ngIf="errorMessage$ | async">
+          {{ errorMessage$ | async }}
         </div>
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn login_btn">Đăng ký</button>

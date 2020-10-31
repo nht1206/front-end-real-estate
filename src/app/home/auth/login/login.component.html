@@ -9,6 +9,10 @@
       </div>
     </div>
     <div class="card-body">
+      <app-loading [loading]="loading$ | async"></app-loading>
+      <div class="alert alert-success" *ngIf="successMessage$ | async">
+        {{ successMessage$ | async }} Hãy đăng nhập vào hệ thống.
+      </div>
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" novalidate>
         <div class="input-group form-group">
           <div class="input-group-prepend">

@@ -21,7 +21,7 @@ export class RegionEffects {
     mergeMap(() =>
       this.regionService.getRegions().pipe(
         map((regions) => new LoadRegionSuccessAction(regions)),
-        catchError((err) => of(new LoadRegionFailureAction(err)))
+        catchError((err) => of(new LoadRegionFailureAction(err.error.message)))
       )
     )
   );

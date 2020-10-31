@@ -25,7 +25,8 @@ p.card-title {
 }
 
 .p-title {
-  min-height: 25px;
+  max-height: 50px;
+  overflow: hidden;
 }
 
 .loader {

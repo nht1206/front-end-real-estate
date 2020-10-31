@@ -1,13 +1,12 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Logout } from './../../../actions/auth.actions';
 import { AppState } from 'src/app/models/app-state';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RoleName } from 'src/app/models/role-name';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { LoadCurrentUser } from 'src/app/actions/auth.actions';
-import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,8 +20,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private storageService: StorageService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private modalService: NgbModal
   ) {
     this.user$ = store.select((app) => app.auth.user);
     this.isAuthenticated$ = store.select((app) => app.auth.isAuthenticated);
@@ -37,6 +36,14 @@ export class NavbarComponent implements OnInit {
         location.assign('/error');
       }
     );
+  }
+
+  goToPostingForm(content): void {
+    if (this.user === null) {
+      this.openModal(content);
+    } else {
+      this.router.navigateByUrl('/posting');
+    }
   }
 
   isAdmin(): boolean {
@@ -64,5 +71,9 @@ export class NavbarComponent implements OnInit {
       }
     });
     return result;
+  }
+
+  openModal(content): void {
+    this.modalService.open(content);
   }
 }

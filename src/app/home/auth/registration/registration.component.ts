@@ -1,3 +1,4 @@
+import { Register } from './../../../actions/auth.actions';
 import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -15,18 +16,17 @@ import { AppState } from 'src/app/models/app-state';
 export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   isAuthenticated$: Observable<boolean>;
-  isSuccessful = false;
-  isSignUpFailed = false;
-  message = '';
-  errorMessage = '';
+  loading$: Observable<boolean>;
+  errorMessage$: Observable<string>;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private router: Router,
     private store: Store<AppState>
   ) {
     this.isAuthenticated$ = store.select((app) => app.auth.isAuthenticated);
+    this.errorMessage$ = store.select((app) => app.auth.errorMessage);
+    this.loading$ = store.select((app) => app.auth.isLoading);
   }
 
   ngOnInit() {
@@ -45,21 +45,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.register(this.registerForm.value).subscribe(
-      (data) => {
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-        this.message = data.message;
-        setTimeout(() => {
-          this.router.navigateByUrl('/login');
-        }, 3000);
-      },
-      (err) => {
-        console.log(err);
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
+    this.store.dispatch(new Register(this.registerForm.value));
   }
 
   get form() {

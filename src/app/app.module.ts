@@ -15,9 +15,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AuthEffects } from './effects/auth.effects';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdvancedSearchComponent } from './home/components/advanced-search/advanced-search.component';
 
 @NgModule({
   declarations: [AppComponent],
+  entryComponents: [AdvancedSearchComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,6 +36,7 @@ import { AuthEffects } from './effects/auth.effects';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    NgbModalModule,
   ],
   providers: [
     {

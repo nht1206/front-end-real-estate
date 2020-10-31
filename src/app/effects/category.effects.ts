@@ -21,7 +21,9 @@ export class CategoryEffects {
     mergeMap(() =>
       this.categoryService.getCategories().pipe(
         map((categories) => new LoadCategorySuccessAction(categories)),
-        catchError((err) => of(new LoadCategoryFailureAction(err)))
+        catchError((err) =>
+          of(new LoadCategoryFailureAction(err.error.message))
+        )
       )
     )
   );

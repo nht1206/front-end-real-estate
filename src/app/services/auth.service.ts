@@ -1,4 +1,4 @@
-import { map } from 'rxjs/operators/';
+import { delay, map } from 'rxjs/operators/';
 import { RoleName } from './../models/role-name';
 import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
@@ -36,7 +36,8 @@ export class AuthService {
         tap((data) => {
           this.storageService.saveToken(data);
         })
-      );
+      )
+      .pipe(delay(300));
   }
 
   logout(): void {
@@ -44,17 +45,19 @@ export class AuthService {
   }
 
   register(user): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'signup',
-      {
-        name: user.name,
-        email: user.email,
-        address: user.address,
-        phoneNumber: user.phoneNumber,
-        password: user.password,
-      },
-      httpOptions
-    );
+    return this.http
+      .post(
+        AUTH_API + 'signup',
+        {
+          name: user.name,
+          email: user.email,
+          address: user.address,
+          phoneNumber: user.phoneNumber,
+          password: user.password,
+        },
+        httpOptions
+      )
+      .pipe(delay(300));
   }
 
   loadCurrentUser(): Observable<User> {

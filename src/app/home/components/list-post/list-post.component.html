@@ -43,14 +43,7 @@
     </div>
   </div>
 </form>
-<div *ngIf="loading$ | async" class="align-items-center">
-  <h3 class="text-warning text-center">
-    <div class="spinner-border text-warning" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-    Đang loading!
-  </h3>
-</div>
+<app-loading [loading]="loading$ | async"></app-loading>
 
 <div
   *ngIf="(posts$ | async)?.empty && !(loading$ | async)"
@@ -66,18 +59,18 @@
     >
       <div
         class="card"
-        *ngIf="post.approved"
-        [routerLink]="['/post-detail', post.id]"
+        *ngIf="post?.approved"
+        [routerLink]="['/post-detail', post?.id]"
       >
         <img
-          *ngIf="post.postImages.length !== 0"
+          *ngIf="post?.postImages.length !== 0"
           class="card-img-top"
-          [src]="post.postImages[0].image"
+          [src]="post?.postImages[0].image"
           height="200"
           alt="post image"
         />
         <img
-          *ngIf="post.postImages.length === 0"
+          *ngIf="post?.postImages.length === 0"
           class="card-img-top"
           [src]="'../../../../../assets/img/no-image.jpg'"
           height="200"
@@ -85,32 +78,29 @@
         />
         <div class="card-body">
           <div class="p-title">
-            <p class="card-title" *ngIf="post.postType !== null">
-              [{{ post?.postType.name }}]&nbsp;
+            <p class="card-title">
+              [{{ post?.postType.name }}]&nbsp;{{ post?.title }}
             </p>
           </div>
-          <div class="p-title">
-            <p class="card-title">{{ post.title }}</p>
-          </div>
           <p class="post-price">
-            Giá: <strong>{{ post.price | number }}</strong> VNĐ
+            Giá: <strong>{{ post?.price | number }}</strong> VNĐ
           </p>
           <div class="post-info">
             <div style="height: 26px">
-              <div *ngIf="post.region !== null">
+              <div *ngIf="post?.region !== null">
                 <em class="fas fa-map-marker-alt"></em> tại
                 {{ post?.region.name }}
               </div>
             </div>
-            <div>Ngày đăng: {{ post.createdAt | date: "dd/MM/yyyy" }}</div>
+            <div>Ngày đăng: {{ post?.createdAt | date: "dd/MM/yyyy" }}</div>
             <div>
               <span>
-                <em class="fas fa-eye"></em> Lượt xem {{ post.viewCount }}
+                <em class="fas fa-eye"></em> Lượt xem {{ post?.viewCount }}
               </span>
-              <label class="float-right" *ngIf="post.customerType"
+              <label class="float-right" *ngIf="post?.customerType"
                 >Cá nhân</label
               >
-              <label class="float-right" *ngIf="!post.customerType"
+              <label class="float-right" *ngIf="!post?.customerType"
                 >Công ty</label
               >
             </div>

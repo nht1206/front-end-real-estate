@@ -14,6 +14,7 @@ import { ListPostComponent } from './components/list-post/list-post.component';
 import { PostingFormComponent } from './components/posting/posting-form/posting-form.component';
 import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
     PostingFormComponent,
     PostingConfirmComponent,
     PostDetailComponent,
+    LoadingComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
 })

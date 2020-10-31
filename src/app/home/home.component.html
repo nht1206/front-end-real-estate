@@ -15,29 +15,6 @@
     <div class="col-md-2 d-none d-lg-block"></div>
   </div>
 
-  <ng-template let-modal #checkUser>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Đăng nhập</h4>
-      <span style="cursor: pointer" class="close" (click)="modal.dismiss()"
-        >&times;</span
-      >
-    </div>
-    <div class="modal-body">
-      <p>Vui lòng đăng nhập để tiếp tục!</p>
-      <p>
-        Đăng nhập <a routerLink="/login" (click)="modal.close()">tại đây</a>
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-sm btn-outline-dark"
-        (click)="modal.close()"
-      >
-        Quay lại
-      </button>
-    </div>
-  </ng-template>
   <!-- Footer -->
   <footer class="page-footer font-small stylish-color-dark pt-4">
     <!-- Footer Links -->

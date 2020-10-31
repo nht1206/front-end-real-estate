@@ -30,13 +30,13 @@ export class PostService {
   }
 
   getPostById(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.API}/${id}`).pipe(delay(500));
+    return this.http.get<Post>(`${this.API}/${id}`).pipe(delay(300));
   }
 
   getPostsByUserId(page = 0, userId: number): Observable<Page<Post>> {
     return this.http
       .get<Page<Post>>(this.API + '/user/' + userId + '?page=' + page)
-      .pipe(delay(500));
+      .pipe(delay(300));
   }
 
   getPostsByViewCount(): Observable<Array<Post>> {
@@ -58,7 +58,7 @@ export class PostService {
   searchAll(option: Search = new Search(), page = 0): Observable<Page<Post>> {
     return this.http
       .post<Page<Post>>(`${this.API}/searchAll?page=${page}`, option)
-      .pipe(delay(500));
+      .pipe(delay(300));
   }
 
   searchPendingPosts(
