@@ -1,3 +1,4 @@
+import { LoadPostTypeAction } from './../../../../actions/post-type.action';
 import { Router } from '@angular/router';
 import { SubmitPostingForm } from './../../../../actions/post.action';
 import { Direction } from './../../../../models/direction';
@@ -14,6 +15,7 @@ import { state } from '@angular/animations';
 import { Region } from 'src/app/models/region';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
+import { PostType } from 'src/app/models/post-type';
 
 @Component({
   selector: 'app-posting-form',
@@ -23,6 +25,7 @@ import { Post } from 'src/app/models/post';
 export class PostingFormComponent implements OnInit {
   postingForm: FormGroup;
   user$: Observable<User>;
+  postTypes$: Observable<Array<PostType>>;
   regions$: Observable<Array<Region>>;
   categories$: Observable<Array<Category>>;
   direction$: Observable<Array<Direction>>;
@@ -39,12 +42,14 @@ export class PostingFormComponent implements OnInit {
     this.regions$ = store.select((app) => app.region.list);
     this.categories$ = store.select((app) => app.category.list);
     this.direction$ = store.select((app) => app.direction.list);
+    this.postTypes$ = store.select((app) => app.postType.list);
   }
 
   ngOnInit(): void {
     this.store.dispatch(new LoadRegionAction());
     this.store.dispatch(new LoadCategoryAction());
     this.store.dispatch(new LoadDirectionAction());
+    this.store.dispatch(new LoadPostTypeAction());
     this.postingForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       condition: [true],
@@ -105,6 +110,13 @@ export class PostingFormComponent implements OnInit {
       if (user) {
         this.postingForm.patchValue({
           user,
+        });
+      }
+    });
+    this.postTypes$.subscribe((postTypes) => {
+      if (postTypes) {
+        this.postingForm.patchValue({
+          postType: postTypes[0],
         });
       }
     });

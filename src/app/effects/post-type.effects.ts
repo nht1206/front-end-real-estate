@@ -14,12 +14,12 @@ import { of } from 'rxjs';
 export class PostTypeEffects {
   constructor(
     private actions$: Actions,
-    private regionService: PostTypeService
+    private postTypeService: PostTypeService
   ) {}
   @Effect() loadPostType$ = this.actions$.pipe(
     ofType<LoadPostTypeAction>(PostTypeActionTypes.LOAD_POST_TYPE),
     mergeMap(() =>
-      this.regionService.getPostTypes().pipe(
+      this.postTypeService.getPostTypes().pipe(
         map((postTypes) => new LoadPostTypeSuccessAction(postTypes)),
         catchError((err) =>
           of(new LoadPostTypeFailureAction(err.error.message))
