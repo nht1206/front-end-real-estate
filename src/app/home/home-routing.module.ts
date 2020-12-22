@@ -1,3 +1,4 @@
+import { UserInformationComponent } from './components/user-information/user-information.component';
 import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { ListPostComponent } from './components/list-post/list-post.component';
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'post-detail/:id',
         component: PostDetailComponent,
+      },
+      {
+        path: 'user',
+        component: UserInformationComponent,
       },
     ],
   },
