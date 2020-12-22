@@ -24,6 +24,7 @@ export enum PostActionTypes {
   POSTING = '[Post] Posting',
   POSTING_SUCCESS = '[Post] Posting Success',
   POSTING_FAILURE = '[Post] Posting Failure',
+  ADDING_IMAGE_URLS = '[Post] Adding Image Urls',
 }
 
 export class LoadPostAction implements Action {
@@ -126,6 +127,11 @@ export class PostingFailure implements Action {
   constructor(public payload: Post) {}
 }
 
+export class AddingImageUrls implements Action {
+  readonly type = PostActionTypes.ADDING_IMAGE_URLS;
+  constructor(public payload: string[]) {}
+}
+
 export type PostActions =
   | LoadPostAction
   | LoadPostSuccessAction
@@ -144,4 +150,5 @@ export type PostActions =
   | SubmitPostingForm
   | Posting
   | PostingSuccess
-  | PostingFailure;
+  | PostingFailure
+  | AddingImageUrls;

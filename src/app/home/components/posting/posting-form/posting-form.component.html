@@ -339,20 +339,46 @@
         </div>
       </div>
     </div>
-    <!-- <div class="form-group row">
-      <label  class="col-sm-3 col-form-label">Hình ảnh:</label>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Hình ảnh:</label>
       <div class="col-sm-9">
-        <label style=" color: sandybrown">Chỉ hình ảnh thật của sản phẩm mới được duyệt. Lưu ý không sử dụng hình ảnh có đính kèm số điện thoại hoặc địa chỉ website.</label>
+        <label style="color: sandybrown"
+          >Chỉ hình ảnh thật của sản phẩm mới được duyệt. Lưu ý không sử dụng
+          hình ảnh có đính kèm số điện thoại hoặc địa chỉ website.</label
+        >
         <div class="row">
-          <div *ngFor="let image of listImages" class="d-flex m-1">
-            <img [src]="image" height="130" width="150">
+          <div
+            *ngFor="let imageUrl of imageUrls; let index = index"
+            class="d-flex m-1 preview-image"
+          >
+            <img [src]="imageUrl" height="130" width="150" [alt]="imageUrl" />
+            <i
+              class="fas fa-times-circle btn-delete"
+              (click)="removeImage(index)"
+            ></i>
+          </div>
+          <div class="d-flex m-1 px-3 py-3">
+            <img
+              src="../../../../../assets/img/upload-img.png"
+              height="100"
+              width="100"
+              (click)="addInput.click()"
+              alt="upload-img"
+            />
           </div>
         </div>
-          <p *ngIf="checkValidPostImage" class="text-danger">Thêm ít nhất 5 ảnh!</p>
-        <button type="button" (click)="addInput.click()"><img src="../../../../../assets/img/upload-img.png" height="100" width="100"></button>
-        <input type="file" accept="image/*" (change)="addImage($event)" hidden multiple #addInput>
+        <p *ngIf="imagesAmount < 5" class="text-danger">Thêm ít nhất 5 ảnh!</p>
+
+        <input
+          type="file"
+          accept="image/*"
+          (change)="fileChange($event)"
+          hidden
+          multiple
+          #addInput
+        />
       </div>
-    </div> -->
+    </div>
     <div class="row d-flex justify-content-center" id="button-post">
       <div class="col-3">
         <button class="btn btn-warning btn-block" routerLink="/" type="button">
@@ -362,7 +388,7 @@
       <div class="col-3">
         <button
           class="btn btn-info btn-block"
-          [disabled]="postingForm.invalid"
+          [disabled]="postingForm.invalid || imagesAmount < 5"
           type="submit"
         >
           <em class="fa fa-check"></em> Đăng tin

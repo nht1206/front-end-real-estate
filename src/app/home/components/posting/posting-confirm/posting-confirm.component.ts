@@ -12,6 +12,7 @@ import { Post } from 'src/app/models/post';
 })
 export class PostingConfirmComponent implements OnInit {
   currentPostingPost$: Observable<Post>;
+  imageUrls$: Observable<string[]>;
   constructor(private store: Store<AppState>, private router: Router) {
     this.currentPostingPost$ = store.select(
       (app) => app.post.currentPostingPost
@@ -26,5 +27,6 @@ export class PostingConfirmComponent implements OnInit {
           this.router.navigateByUrl('/');
         }
       });
+    this.imageUrls$ = this.store.select((app) => app.post.imageUrls);
   }
 }

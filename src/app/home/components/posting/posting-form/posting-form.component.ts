@@ -1,6 +1,9 @@
 import { LoadPostTypeAction } from './../../../../actions/post-type.action';
 import { Router } from '@angular/router';
-import { SubmitPostingForm } from './../../../../actions/post.action';
+import {
+  SubmitPostingForm,
+  AddingImageUrls,
+} from './../../../../actions/post.action';
 import { Direction } from './../../../../models/direction';
 import { LoadDirectionAction } from './../../../../actions/direction.action';
 import { LoadCategoryAction } from './../../../../actions/category.action';
@@ -16,6 +19,7 @@ import { Region } from 'src/app/models/region';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
 import { PostType } from 'src/app/models/post-type';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-posting-form',
@@ -30,6 +34,8 @@ export class PostingFormComponent implements OnInit {
   categories$: Observable<Array<Category>>;
   direction$: Observable<Array<Direction>>;
   currentPostingPost$: Observable<Post>;
+  imageUrls: string[] = [];
+  imagesAmount: number = 0;
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
@@ -71,7 +77,7 @@ export class PostingFormComponent implements OnInit {
           Validators.min(0),
         ],
       ],
-      deal: [null],
+      deal: [false],
       content: ['', [Validators.required, Validators.maxLength(65535)]],
       user: [],
       category: [],
@@ -124,7 +130,27 @@ export class PostingFormComponent implements OnInit {
   submitForm(): void {
     if (this.postingForm.valid) {
       this.store.dispatch(new SubmitPostingForm(this.postingForm.value));
+      this.store.dispatch(new AddingImageUrls(this.imageUrls));
       this.router.navigateByUrl('/confirm');
     }
+  }
+
+  fileChange(e): void {
+    if (e.target.files && e.target.files[0]) {
+      let filesAmount = e.target.files.length;
+      this.imagesAmount += filesAmount;
+      for (let i = 0; i < filesAmount; i++) {
+        let reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.imageUrls.push(event.target.result);
+        };
+        reader.readAsDataURL(e.target.files[i]);
+      }
+    }
+  }
+
+  removeImage(index) {
+    this.imageUrls.splice(index, 1);
+    this.imagesAmount--;
   }
 }

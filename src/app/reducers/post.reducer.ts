@@ -5,6 +5,7 @@ import { Page } from '../models/page';
 
 export interface PostState {
   list: Page<Post>;
+  imageUrls: string[];
   loading: boolean;
   isPosting: boolean;
   error: Error;
@@ -31,6 +32,7 @@ const initialState: PostState = {
   currentOption: new Search(),
   currentPost: null,
   currentPostingPost: null,
+  imageUrls: [],
 };
 
 export function PostReducer(
@@ -66,6 +68,8 @@ export function PostReducer(
       return { ...state, error: action.payload, loading: false };
     case PostActionTypes.SUBMIT_POSTING_FORM:
       return { ...state, currentPostingPost: action.payload, isPosting: true };
+    case PostActionTypes.ADDING_IMAGE_URLS:
+      return { ...state, imageUrls: action.payload };
     default:
       return state;
   }
