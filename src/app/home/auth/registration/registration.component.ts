@@ -1,9 +1,7 @@
 import { Register } from './../../../actions/auth.actions';
-import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/models/app-state';

@@ -1,11 +1,10 @@
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { StorageService } from './../../../services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppState } from 'src/app/models/app-state';
-import { Login, LoadCurrentUser } from 'src/app/actions/auth.actions';
+import { Login } from 'src/app/actions/auth.actions';
 
 @Component({
   selector: 'app-login',

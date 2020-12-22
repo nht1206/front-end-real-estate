@@ -122,19 +122,19 @@
     <div>
       <div class="row">
         <label class="col-2">Họ và tên:</label>
-        <label class="col-10">{{ (post$ | async)?.user.name }}</label>
+        <label class="col-10">{{ (post$ | async)?.user?.name }}</label>
       </div>
       <div class="row">
         <label class="col-2">Email:</label>
-        <label class="col-10">{{ (post$ | async)?.user.email }}</label>
+        <label class="col-10">{{ (post$ | async)?.user?.email }}</label>
       </div>
       <div class="row">
         <label class="col-2">Số điện thoại:</label>
-        <label class="col-10">{{ (post$ | async)?.user.phoneNumber }}</label>
+        <label class="col-10">{{ (post$ | async)?.user?.phoneNumber }}</label>
       </div>
       <div class="row">
         <label class="col-2">Địa chỉ:</label>
-        <label class="col-10">{{ (post$ | async)?.user.address }}</label>
+        <label class="col-10">{{ (post$ | async)?.user?.address }}</label>
       </div>
     </div>
   </div>
