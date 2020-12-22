@@ -17,6 +17,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 import { LoadingComponent } from './components/loading/loading.component';
 import { UserInformationComponent } from './components/user-information/user-information.component';
 import { SupportRequestComponent } from './components/support-request/support-request.component';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,11 @@ import { SupportRequestComponent } from './components/support-request/support-re
     UserInformationComponent,
     SupportRequestComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    NgbProgressbarModule,
+  ],
 })
 export class HomeModule {}

@@ -1,14 +1,10 @@
 import { Observable } from 'rxjs';
-import {
-  GetPostById,
-  UpdatePostViewCount,
-} from './../../../actions/post.action';
+import { UpdatePostViewCount } from './../../../actions/post.action';
 import { AppState } from './../../../models/app-state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post';
-import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -19,7 +15,6 @@ export class PostDetailComponent implements OnInit {
   post$: Observable<Post>;
   loading$: Observable<boolean>;
   constructor(
-    private postService: PostService,
     private activatedRoute: ActivatedRoute,
     private store: Store<AppState>
   ) {
@@ -30,7 +25,6 @@ export class PostDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((route) => {
       if (route.id) {
-        this.store.dispatch(new GetPostById(route.id));
         this.store.dispatch(new UpdatePostViewCount(route.id));
       }
     });

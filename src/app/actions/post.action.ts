@@ -51,6 +51,12 @@ export class AddPostAction implements Action {
   constructor(public payload: Post) {}
 }
 
+export class AddPostSuccessAction implements Action {
+  readonly type = PostActionTypes.ADD_POST_SUCCESS;
+
+  constructor(public payload: Post) {}
+}
+
 export class AddPostFailureAction implements Action {
   readonly type = PostActionTypes.ADD_POST_FAILURE;
 
@@ -137,6 +143,7 @@ export type PostActions =
   | LoadPostSuccessAction
   | LoadPostFailureAction
   | AddPostAction
+  | AddPostSuccessAction
   | AddPostFailureAction
   | DeletePostAction
   | DeletePostFailureAction

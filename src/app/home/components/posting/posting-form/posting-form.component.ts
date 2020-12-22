@@ -14,12 +14,10 @@ import { User } from './../../../../models/user';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { state } from '@angular/animations';
 import { Region } from 'src/app/models/region';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
 import { PostType } from 'src/app/models/post-type';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-posting-form',
@@ -34,6 +32,7 @@ export class PostingFormComponent implements OnInit {
   categories$: Observable<Array<Category>>;
   direction$: Observable<Array<Direction>>;
   currentPostingPost$: Observable<Post>;
+  errorMessage$: Observable<Error>;
   imageUrls: string[] = [];
   imagesAmount: number = 0;
   constructor(
@@ -49,6 +48,15 @@ export class PostingFormComponent implements OnInit {
     this.categories$ = store.select((app) => app.category.list);
     this.direction$ = store.select((app) => app.direction.list);
     this.postTypes$ = store.select((app) => app.postType.list);
+    this.errorMessage$ = store.select((app) => app.post.error);
+    store
+      .select((app) => app.post.imageUrls)
+      .subscribe((imageUrls) => {
+        if (imageUrls.length > 0) {
+          this.imageUrls = [...imageUrls];
+          this.imagesAmount = imageUrls.length;
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -84,7 +92,6 @@ export class PostingFormComponent implements OnInit {
       postType: [],
       direction: [],
       userType: [true],
-      viewCount: [0],
     });
     this.currentPostingPost$.subscribe((post) => {
       if (post) {
@@ -128,6 +135,7 @@ export class PostingFormComponent implements OnInit {
     });
   }
   submitForm(): void {
+    this.imageUrls.forEach((url) => {});
     if (this.postingForm.valid) {
       this.store.dispatch(new SubmitPostingForm(this.postingForm.value));
       this.store.dispatch(new AddingImageUrls(this.imageUrls));

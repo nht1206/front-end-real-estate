@@ -19,6 +19,9 @@ import { environment } from '../environments/environment';
 import { AuthEffects } from './effects/auth.effects';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdvancedSearchComponent } from './home/components/advanced-search/advanced-search.component';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +44,9 @@ import { AdvancedSearchComponent } from './home/components/advanced-search/advan
       logOnly: environment.production,
     }),
     NgbModalModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
   providers: [
     {

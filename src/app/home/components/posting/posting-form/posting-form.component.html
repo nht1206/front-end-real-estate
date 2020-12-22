@@ -1,5 +1,8 @@
 <div class="container-fluid m-3">
   <div id="content">
+    <p class="alert alert-danger" *ngIf="errorMessage$ | async">
+      {{ errorMessage$ | async }}
+    </p>
     <h3>Đăng tin</h3>
     <h5>Thông tin liên hệ</h5>
     <hr style="background-color: black" />

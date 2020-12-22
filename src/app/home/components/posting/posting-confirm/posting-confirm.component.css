@@ -4,3 +4,15 @@
 #title-post-confirm {
   padding: 15px;
 }
+.preview-image {
+  height: 150px;
+  width: 150px;
+  position: relative;
+}
+.progress-bar {
+  height: 20px;
+  bottom: 0px;
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+}

@@ -1,9 +1,4 @@
-import {
-  GetPostById,
-  GetPostByIdSuccess,
-  GetPostByIdFailure,
-  UpdatePostViewCount,
-} from './../actions/post.action';
+import { Router } from '@angular/router';
 import { PostService } from '../services/post.service';
 import {
   PostActionTypes,
@@ -17,14 +12,23 @@ import {
   SearchAllPostAction,
   SearchAllPostFailureAction,
   SearchAllPostSuccessAction,
+  GetPostById,
+  GetPostByIdSuccess,
+  GetPostByIdFailure,
+  UpdatePostViewCount,
+  AddPostSuccessAction,
 } from '../actions/post.action';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { mergeMap, map, catchError } from 'rxjs/operators/';
+import { mergeMap, map, catchError, tap } from 'rxjs/operators/';
 import { of } from 'rxjs';
 @Injectable()
 export class PostEffects {
-  constructor(private actions$: Actions, private postService: PostService) {}
+  constructor(
+    private actions$: Actions,
+    private postService: PostService,
+    private router: Router
+  ) {}
   @Effect() loadPost$ = this.actions$.pipe(
     ofType<LoadPostAction>(PostActionTypes.LOAD_POST),
     mergeMap((action) =>
@@ -39,7 +43,7 @@ export class PostEffects {
     ofType<AddPostAction>(PostActionTypes.ADD_POST),
     mergeMap((action) =>
       this.postService.addPost(action.payload).pipe(
-        map(() => new LoadPostAction(0)),
+        map((post) => new AddPostSuccessAction(post)),
         catchError((err) => of(new AddPostFailureAction(err.error.message)))
       )
     )
@@ -76,6 +80,13 @@ export class PostEffects {
     )
   );
 
+  @Effect({ dispatch: false }) getPostByIdFailure$ = this.actions$.pipe(
+    ofType<GetPostByIdFailure>(PostActionTypes.GET_POST_BY_ID_FAILURE),
+    tap(() => {
+      this.router.navigateByUrl('');
+    })
+  );
+
   @Effect() updatePostViewCount$ = this.actions$.pipe(
     ofType<UpdatePostViewCount>(PostActionTypes.UPDATE_POST_VIEW_COUNT),
     mergeMap((action) =>
@@ -83,5 +94,20 @@ export class PostEffects {
         .updatePostViewCount(parseInt(action.payload, 10))
         .pipe(map(() => new GetPostById(action.payload)))
     )
+  );
+
+  @Effect() addPostSuccess$ = this.actions$.pipe(
+    ofType<AddPostSuccessAction>(PostActionTypes.ADD_POST_SUCCESS),
+    tap((action) => {
+      this.router.navigateByUrl('post-detail/' + action.payload.id);
+    }),
+    mergeMap(() => of(new LoadPostAction(0)))
+  );
+
+  @Effect({ dispatch: false }) addPostFailure$ = this.actions$.pipe(
+    ofType<AddPostFailureAction>(PostActionTypes.ADD_POST_FAILURE),
+    tap((action) => {
+      this.router.navigateByUrl('posting');
+    })
   );
 }

@@ -6,7 +6,7 @@ import { Region } from './region';
 import { User } from './user';
 
 export interface Post {
-  id: number;
+  id?: number;
   title: string;
   condition: boolean;
   address: string;
@@ -14,16 +14,16 @@ export interface Post {
   area: number;
   price: number;
   deal: boolean;
-  viewCount: number;
+  viewCount?: number;
   content: string;
   status: boolean;
   approved: boolean;
   user: User;
   category: Category;
-  postImages: PostImage[];
+  postImages?: PostImage[];
   postType: PostType;
   direction: Direction;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   userType: boolean;
 }

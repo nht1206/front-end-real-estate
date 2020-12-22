@@ -1,4 +1,5 @@
 export interface PostImage {
-  id: number;
+  id?: number;
   image: string;
+  status?: boolean;
 }

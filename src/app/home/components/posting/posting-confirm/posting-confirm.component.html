@@ -17,58 +17,60 @@
     <div class="col-sm-11 ml-auto">
       <div
         class="form-group row"
-        *ngIf="(currentPostingPost$ | async).category !== null"
+        *ngIf="(currentPostingPost$ | async)?.category !== null"
       >
         <label class="col-sm-3 col-form-label" style="font-weight: bold"
           >Danh Mục:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).category.name }}</label>
+          <label>{{ (currentPostingPost$ | async)?.category.name }}</label>
         </div>
       </div>
       <div
         class="form-group row"
-        *ngIf="(currentPostingPost$ | async).region !== null"
+        *ngIf="(currentPostingPost$ | async)?.region !== null"
       >
         <label class="col-sm-3 col-form-label" style="font-weight: bold"
           >Vùng Miền:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).region.name }}</label>
+          <label>{{ (currentPostingPost$ | async)?.region.name }}</label>
         </div>
       </div>
       <div
         class="form-group row"
-        *ngIf="(currentPostingPost$ | async).userType !== null"
+        *ngIf="(currentPostingPost$ | async)?.userType !== null"
       >
         <label class="col-sm-3 col-form-label" style="font-weight: bold"
           >Bạn Là:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label *ngIf="(currentPostingPost$ | async).userType">Cá Nhân</label>
-          <label *ngIf="!(currentPostingPost$ | async).userType">Công ty</label>
+          <label *ngIf="(currentPostingPost$ | async)?.userType">Cá Nhân</label>
+          <label *ngIf="!(currentPostingPost$ | async)?.userType"
+            >Công ty</label
+          >
         </div>
       </div>
       <div
         class="form-group row"
-        *ngIf="(currentPostingPost$ | async).direction !== null"
+        *ngIf="(currentPostingPost$ | async)?.direction !== null"
       >
         <label class="col-sm-3 col-form-label" style="font-weight: bold"
           >Hướng:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).direction.name }}</label>
+          <label>{{ (currentPostingPost$ | async)?.direction.name }}</label>
         </div>
       </div>
       <div
         class="form-group row"
-        *ngIf="(currentPostingPost$ | async).postType !== null"
+        *ngIf="(currentPostingPost$ | async)?.postType !== null"
       >
         <label class="col-sm-3 col-form-label" style="font-weight: bold"
           >Loại bài đăng:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).postType.name }}</label>
+          <label>{{ (currentPostingPost$ | async)?.postType.name }}</label>
         </div>
       </div>
       <div class="form-group row">
@@ -76,19 +78,19 @@
           >Tiêu đề:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).title }}</label>
+          <label>{{ (currentPostingPost$ | async)?.title }}</label>
         </div>
       </div>
       <div
         class="form-group row"
-        *ngIf="(currentPostingPost$ | async).condition !== null"
+        *ngIf="(currentPostingPost$ | async)?.condition !== null"
       >
         <label class="col-sm-3 col-form-label" style="font-weight: bold"
           >Tình trạng:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label *ngIf="(currentPostingPost$ | async).condition">Mới</label>
-          <label *ngIf="!(currentPostingPost$ | async).condition"
+          <label *ngIf="(currentPostingPost$ | async)?.condition">Mới</label>
+          <label *ngIf="!(currentPostingPost$ | async)?.condition"
             >Đã sử dụng</label
           >
         </div>
@@ -98,7 +100,7 @@
           >Địa chỉ:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).address }}</label>
+          <label>{{ (currentPostingPost$ | async)?.address }}</label>
         </div>
       </div>
       <div class="form-group row">
@@ -106,7 +108,7 @@
           >Diện tích:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).area }} m<sup>2</sup></label>
+          <label>{{ (currentPostingPost$ | async)?.area }} m<sup>2</sup></label>
         </div>
       </div>
       <div class="form-group row">
@@ -114,7 +116,7 @@
           >Giá:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).price | number }} VNĐ</label>
+          <label>{{ (currentPostingPost$ | async)?.price | number }} VNĐ</label>
         </div>
       </div>
       <div class="form-group row">
@@ -122,20 +124,28 @@
           >Nội dung:</label
         >
         <div class="col-sm-9 col-form-label">
-          <label>{{ (currentPostingPost$ | async).content }}</label>
+          <label>{{ (currentPostingPost$ | async)?.content }}</label>
         </div>
       </div>
-      <div class="form-group row" *ngIf="(imageUrls$ | async).length !== 0">
+      <div class="form-group row" *ngIf="(imageUrls$ | async)?.length !== 0">
         <label class="col-sm-3 col-form-label" style="font-weight: bold"
           >Hình ảnh:</label
         >
         <div class="col-sm-9 col-form-label">
           <div class="row">
             <div
-              *ngFor="let image of imageUrls$ | async"
-              class="flex-column m-1"
+              *ngFor="let image of imageUrls$ | async; let i = index"
+              class="flex-column m-1 preview-image"
             >
-              <img [src]="image" height="130" width="150" />
+              <img [src]="image" height="130" width="150" [alt]="image" />
+              <ngb-progressbar
+                *ngIf="isPosting"
+                class="progress-bar"
+                type="success"
+                textType="white"
+                [value]="listPercentages[i] | async"
+                [showValue]="true"
+              ></ngb-progressbar>
             </div>
           </div>
         </div>
@@ -151,7 +161,7 @@
           </button>
         </div>
         <div class="col-3">
-          <button type="button" class="btn btn-info btn-block">
+          <button type="button" (click)="post()" class="btn btn-info btn-block">
             <i class="fa fa-check"></i> Xác nhận
           </button>
         </div>
