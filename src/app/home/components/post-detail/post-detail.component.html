@@ -5,6 +5,7 @@
       >[{{ (post$ | async)?.postType?.name }}]&nbsp;</label
     >
     <label>{{ (post$ | async)?.title }}</label>
+    <i *ngIf="!(post$ | async)?.approved">(Chưa duyệt)</i>
   </div>
   <hr />
   <div class="row">
