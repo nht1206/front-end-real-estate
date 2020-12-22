@@ -1,3 +1,4 @@
+import { PostTypeEffects } from './effects/post-type.effects';
 import { DirectionEffects } from './effects/direction.effects';
 import { CategoryEffects } from './effects/category.effects';
 import { RegionEffects } from './effects/region.effects';
@@ -32,6 +33,7 @@ import { AdvancedSearchComponent } from './home/components/advanced-search/advan
       RegionEffects,
       CategoryEffects,
       DirectionEffects,
+      PostTypeEffects,
     ]),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
