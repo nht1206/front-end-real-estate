@@ -15,6 +15,7 @@ import { PostingFormComponent } from './components/posting/posting-form/posting-
 import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { UserInformationComponent } from './components/user-information/user-information.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     PostingConfirmComponent,
     PostDetailComponent,
     LoadingComponent,
+    UserInformationComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
 })
