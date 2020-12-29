@@ -1,0 +1,49 @@
+<div class="p-2">
+  <h3 class="font-weight-normal">Thông tin cá nhân</h3>
+</div>
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <img
+      *ngIf="user$ | async"
+      [src]="(user$ | async).avatar"
+      alt="avatar"
+      style="border-radius: 50%; width: 200px; height: 200px"
+    />
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-12" *ngIf="user$ | async">
+    <div class="row">
+      <div class="col-4">Họ và tên:</div>
+      <div class="col-8">{{ (user$ | async).name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4">Email:</div>
+      <div class="col-8">{{ (user$ | async).email }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4">Địa chỉ:</div>
+      <div class="col-8">{{ (user$ | async).address }}</div>
+    </div>
+    <div class="row">
+      <div class="col-4">Số điện thoại:</div>
+      <div class="col-8">{{ (user$ | async).phoneNumber }}</div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-6">
+        <button
+          class="btn btn-block btn-primary"
+          [routerLink]="['/update/profile']"
+        >
+          Chỉnh Sửa Thông Tin
+        </button>
+      </div>
+      <div class="col-6">
+        <button
+          class="btn btn-block btn-primary"
+          [routerLink]="['/update/password']"
+        >
+          Đổi Mật Khẩu
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

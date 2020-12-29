@@ -1,5 +1,5 @@
+import { UserComponent } from './components/user/user.component';
 import { SupportRequestComponent } from './components/support-request/support-request.component';
-import { UserInformationComponent } from './components/user-information/user-information.component';
 import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { ListPostComponent } from './components/list-post/list-post.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
       },
       {
         path: 'user',
-        component: UserInformationComponent,
+        component: UserComponent,
       },
       {
         path: 'support-request',

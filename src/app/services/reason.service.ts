@@ -7,7 +7,7 @@ import { Reason } from '../models/reason';
   providedIn: 'root',
 })
 export class ReasonService {
-  private readonly API = 'https://rhys-api.herokuapp.com/v1/reasons';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/reasons';
 
   constructor(private http: HttpClient) {}
 

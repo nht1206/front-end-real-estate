@@ -15,9 +15,10 @@ import { PostingFormComponent } from './components/posting/posting-form/posting-
 import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { UserInformationComponent } from './components/user-information/user-information.component';
 import { SupportRequestComponent } from './components/support-request/support-request.component';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserInformationComponent } from './components/user/user-information/user-information.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
     LoadingComponent,
     UserInformationComponent,
     SupportRequestComponent,
+    UserComponent,
   ],
   imports: [
     CommonModule,

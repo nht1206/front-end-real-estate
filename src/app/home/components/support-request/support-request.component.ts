@@ -1,9 +1,12 @@
+import { CreateSupportAction } from './../../../actions/support.actions';
+import { LoadReasonAction } from './../../../actions/reason.actions';
+import { AppState } from 'src/app/models/app-state';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Reason } from 'src/app/models/reason';
-import { ReasonService } from 'src/app/services/reason.service';
-import { SupportService } from 'src/app/services/support.service';
 
 @Component({
   selector: 'app-support-request',
@@ -12,14 +15,15 @@ import { SupportService } from 'src/app/services/support.service';
 })
 export class SupportRequestComponent implements OnInit {
   supportForm: FormGroup;
-  reasons: Reason[];
+  reasons$: Observable<Reason[]>;
 
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private reasonService: ReasonService,
-    private supportService: SupportService
-  ) {}
+    private store: Store<AppState>
+  ) {
+    this.reasons$ = store.select((app) => app.reason.list);
+  }
 
   ngOnInit(): void {
     this.supportForm = this.formBuilder.group({
@@ -45,13 +49,12 @@ export class SupportRequestComponent implements OnInit {
       content: ['', [Validators.required, Validators.maxLength(65535)]],
       status: [''],
     });
-
-    this.getAllReasons();
+    this.store.dispatch(new LoadReasonAction());
   }
 
   onSubmit() {
     if (this.supportForm.valid) {
-      this.supportService.createSupport(this.supportForm.value).subscribe();
+      this.store.dispatch(new CreateSupportAction(this.supportForm.value));
     }
   }
 
@@ -65,12 +68,5 @@ export class SupportRequestComponent implements OnInit {
     } else {
       this.modalService.dismissAll();
     }
-  }
-
-  getAllReasons() {
-    this.reasonService.getReasons().subscribe((data) => {
-      this.reasons = data;
-      console.log(this.reasons);
-    });
   }
 }

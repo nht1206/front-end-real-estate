@@ -6,6 +6,7 @@ import { CategoryReducer } from './category.reducer';
 import { DirectionReducer } from './direction.reducer';
 import { PostTypeReducer } from './post-type.reducer';
 import { SupportReducer } from './support.reducer';
+import { ReasonReducer } from './reason.reducer';
 
 export const reducers: ActionReducerMap<any> = {
   post: PostReducer,
@@ -15,4 +16,5 @@ export const reducers: ActionReducerMap<any> = {
   direction: DirectionReducer,
   postType: PostTypeReducer,
   support: SupportReducer,
+  reason: ReasonReducer,
 };

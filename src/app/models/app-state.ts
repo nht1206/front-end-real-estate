@@ -1,3 +1,4 @@
+import { ReasonState } from './../reducers/reason.reducer';
 import { SupportState } from './../reducers/support.reducer';
 import { PostTypeState } from './../reducers/post-type.reducer';
 import { DirectionState } from './../reducers/direction.reducer';
@@ -13,4 +14,5 @@ export interface AppState {
   readonly direction: DirectionState;
   readonly postType: PostTypeState;
   readonly support: SupportState;
+  readonly reason: ReasonState;
 }

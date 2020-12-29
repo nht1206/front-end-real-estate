@@ -107,7 +107,7 @@
       <div formGroupName="reason">
         <select class="form-control col-form-label" formControlName="id">
           <option
-            *ngFor="let reason of reasons"
+            *ngFor="let reason of reasons$ | async"
             [selected]="reason.id === supportForm.value.reason.id"
             [ngValue]="reason.id"
           >
