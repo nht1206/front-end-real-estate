@@ -8,7 +8,7 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class AdminService {
-  private readonly API = 'http://localhost:8080/api/v1/admins/';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/admins/';
   constructor(private http: HttpClient) {}
 
   getAdmins(page): Observable<Page<User>> {

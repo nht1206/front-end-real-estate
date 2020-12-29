@@ -8,7 +8,7 @@ import { Region } from '../models/region';
   providedIn: 'root',
 })
 export class RegionService {
-  private readonly API = 'http://localhost:8080/api/v1/regions';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/regions';
 
   constructor(private http: HttpClient) {}
 

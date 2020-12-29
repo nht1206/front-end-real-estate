@@ -8,7 +8,7 @@ import { PostImage } from '../models/post-image';
   providedIn: 'root',
 })
 export class PostImageService {
-  private readonly API = 'http://localhost:8080/api/v1/postImages';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/postImages';
 
   constructor(private http: HttpClient) {}
 

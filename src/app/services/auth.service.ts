@@ -1,13 +1,12 @@
 import { delay, map } from 'rxjs/operators/';
-import { RoleName } from './../models/role-name';
 import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { tap } from 'rxjs/operators';
 
-const AUTH_API = 'http://localhost:8080/api/v1/auth/';
+const AUTH_API = 'https://rhys-api.herokuapp.com/api/v1/auth/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -36,8 +35,7 @@ export class AuthService {
         tap((data) => {
           this.storageService.saveToken(data);
         })
-      )
-      .pipe(delay(300));
+      );
   }
 
   logout(): void {
@@ -45,19 +43,17 @@ export class AuthService {
   }
 
   register(user): Observable<any> {
-    return this.http
-      .post(
-        AUTH_API + 'signup',
-        {
-          name: user.name,
-          email: user.email,
-          address: user.address,
-          phoneNumber: user.phoneNumber,
-          password: user.password,
-        },
-        httpOptions
-      )
-      .pipe(delay(300));
+    return this.http.post(
+      AUTH_API + 'signup',
+      {
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        phoneNumber: user.phoneNumber,
+        password: user.password,
+      },
+      httpOptions
+    );
   }
 
   loadCurrentUser(): Observable<User> {

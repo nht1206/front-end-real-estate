@@ -7,7 +7,7 @@ import { Role } from '../models/role';
   providedIn: 'root',
 })
 export class RoleService {
-  private readonly API = 'http://localhost:8080/api/v1/roles';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/roles';
 
   constructor(private http: HttpClient) {}
 

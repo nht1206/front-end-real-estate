@@ -8,7 +8,7 @@ import { Category } from '../models/category';
   providedIn: 'root',
 })
 export class CategoryService {
-  private readonly API = 'http://localhost:8080/api/v1/categories';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/categories';
 
   constructor(private http: HttpClient) {}
 

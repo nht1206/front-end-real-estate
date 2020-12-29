@@ -7,7 +7,7 @@ import { Reply } from '../models/reply';
   providedIn: 'root',
 })
 export class ReplyService {
-  private readonly API = 'http://localhost:8080/api/v1/replies';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/replies';
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { Direction } from '../models/direction';
   providedIn: 'root',
 })
 export class DirectionService {
-  private readonly API = 'http://localhost:8080/api/v1/directions';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/directions';
 
   constructor(private http: HttpClient) {}
 

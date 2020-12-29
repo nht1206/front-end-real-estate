@@ -8,7 +8,7 @@ import { PostType } from '../models/post-type';
   providedIn: 'root',
 })
 export class PostTypeService {
-  private readonly API = 'http://localhost:8080/api/v1/postTypes';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/postTypes';
 
   constructor(private http: HttpClient) {}
 

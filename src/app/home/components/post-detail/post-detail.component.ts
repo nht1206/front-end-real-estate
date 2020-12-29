@@ -1,5 +1,8 @@
 import { Observable } from 'rxjs';
-import { UpdatePostViewCount } from './../../../actions/post.action';
+import {
+  UpdatePostViewCount,
+  GetPostById,
+} from './../../../actions/post.action';
 import { AppState } from './../../../models/app-state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -25,6 +28,7 @@ export class PostDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((route) => {
       if (route.id) {
+        this.store.dispatch(new GetPostById(route.id));
         this.store.dispatch(new UpdatePostViewCount(route.id));
       }
     });

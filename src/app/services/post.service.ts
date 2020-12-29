@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PostService {
-  private readonly API = 'http://localhost:8080/api/v1/posts';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/posts';
   constructor(private http: HttpClient) {}
 
   getPosts(page = 0): Observable<Page<Post>> {
@@ -30,13 +30,13 @@ export class PostService {
   }
 
   getPostById(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.API}/${id}`).pipe(delay(300));
+    return this.http.get<Post>(`${this.API}/${id}`);
   }
 
   getPostsByUserId(page = 0, userId: number): Observable<Page<Post>> {
-    return this.http
-      .get<Page<Post>>(this.API + '/user/' + userId + '?page=' + page)
-      .pipe(delay(300));
+    return this.http.get<Page<Post>>(
+      this.API + '/user/' + userId + '?page=' + page
+    );
   }
 
   getPostsByViewCount(): Observable<Array<Post>> {
@@ -56,9 +56,10 @@ export class PostService {
   }
 
   searchAll(option: Search = new Search(), page = 0): Observable<Page<Post>> {
-    return this.http
-      .post<Page<Post>>(`${this.API}/searchAll?page=${page}`, option)
-      .pipe(delay(300));
+    return this.http.post<Page<Post>>(
+      `${this.API}/searchAll?page=${page}`,
+      option
+    );
   }
 
   searchPendingPosts(

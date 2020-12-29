@@ -10,7 +10,7 @@ import { Password } from '../models/password';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly API = 'http://localhost:8080/api/v1/users';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/users';
 
   constructor(private http: HttpClient) {}
 

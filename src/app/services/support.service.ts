@@ -7,7 +7,7 @@ import { Support } from '../models/support';
   providedIn: 'root',
 })
 export class SupportService {
-  private readonly API = 'http://localhost:8080/api/v1/supports';
+  private readonly API = 'https://rhys-api.herokuapp.com/api/v1/supports';
 
   constructor(private http: HttpClient) {}
 
