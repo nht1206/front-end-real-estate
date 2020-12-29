@@ -1,1 +1,171 @@
-<p>support-request works!</p>
+<div class="support-form">
+  <h3 class="font-weight-normal">Liên hệ với chúng tôi</h3>
+  <hr />
+  <form
+    appFocusInvalidInput
+    [formGroup]="supportForm"
+    (ngSubmit)="onSubmit(); openModal(notificationModal, $event)"
+  >
+    <!--    Name-->
+    <div class="form-group">
+      <label class="col-form-label"
+        ><strong>Tên của bạn:<span class="required">*</span></strong></label
+      >
+      <div>
+        <input class="form-control" formControlName="name" />
+        <p
+          *ngIf="
+            supportForm.controls.name.errors?.required &&
+            supportForm.controls.name.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập tên của bạn!
+        </p>
+        <p
+          *ngIf="
+            supportForm.controls.name.errors?.maxlength &&
+            supportForm.controls.name.touched
+          "
+          class="text-danger"
+        >
+          Tên của bạn đã vượt quá số ký tự cho phép. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+
+    <!--    Email-->
+    <div class="form-group">
+      <label class="col-form-label"
+        ><strong>Email:<span class="required">*</span></strong></label
+      >
+      <div>
+        <input class="form-control" formControlName="email" />
+        <p
+          *ngIf="
+            supportForm.controls.email.errors?.required &&
+            supportForm.controls.email.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập email!
+        </p>
+        <p
+          *ngIf="
+            supportForm.controls.email.errors?.maxlength &&
+            supportForm.controls.email.touched
+          "
+          class="text-danger"
+        >
+          Email của bạn đã vượt quá số ký tự cho phép. Vui lòng nhập lại!
+        </p>
+        <p
+          *ngIf="
+            supportForm.controls.email.errors?.pattern &&
+            supportForm.controls.email.touched
+          "
+          class="text-danger"
+        >
+          Email của bạn không đúng định dạng. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+
+    <!--    Phone Number-->
+    <div class="form-group">
+      <label class="col-form-label"
+        ><strong>Số điện thoại:<span class="required">*</span></strong></label
+      >
+      <div>
+        <input class="form-control" formControlName="phoneNumber" />
+        <p
+          *ngIf="
+            supportForm.controls.phoneNumber.errors?.required &&
+            supportForm.controls.phoneNumber.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập số điện thoại!
+        </p>
+        <p
+          *ngIf="
+            supportForm.controls.phoneNumber.errors?.pattern &&
+            supportForm.controls.phoneNumber.touched
+          "
+          class="text-danger"
+        >
+          Số điện thoại của bạn không đúng định dạng. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+
+    <!--    Reason-->
+    <div class="form-group">
+      <label class="col-form-label">
+        <strong>Lý do:</strong>
+      </label>
+      <div formGroupName="reason">
+        <select class="form-control col-form-label" formControlName="id">
+          <option
+            *ngFor="let reason of reasons"
+            [selected]="reason.id === supportForm.value.reason.id"
+            [ngValue]="reason.id"
+          >
+            {{ reason.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!--    Content-->
+    <div class="form-group">
+      <label class="col-form-label"
+        ><strong>Nội dung:<span class="required">*</span></strong></label
+      >
+      <textarea formControlName="content"></textarea>
+      <p
+        *ngIf="
+          supportForm.controls.content.errors?.required &&
+          supportForm.controls.content.touched
+        "
+        class="text-danger"
+      >
+        Vui lòng nhập nội dung!
+      </p>
+      <p
+        *ngIf="
+          supportForm.controls.content.errors?.maxlength &&
+          supportForm.controls.content.touched
+        "
+        class="text-danger"
+      >
+        Nội dung của bạn đã vượt quá số ký tự cho phép. Vui lòng nhập lại!
+      </p>
+    </div>
+
+    <!--    Button-->
+    <button class="btn btn-primary btn-block ml-auto w-25">Gửi yêu cầu</button>
+  </form>
+
+  <!-- Modal -->
+  <ng-template let-modal #notificationModal>
+    <div class="modal-header">
+      <h5 class="modal-title">Thông báo!</h5>
+    </div>
+    <div class="modal-body">
+      <p>Yêu cầu của bạn đã được gửi tới quản trị viên!</p>
+      <p>Chúng tôi sẽ trả lời yêu cầu của bạn trong thời gian sớm nhất!</p>
+      <p>Chân thành cảm ơn!</p>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-warning text-light"
+        routerLink=""
+        (click)="modal.dismiss()"
+      >
+        <em class="fa fa-angle-left"></em> Quay trở lại trang chủ
+      </button>
+    </div>
+  </ng-template>
+</div>
