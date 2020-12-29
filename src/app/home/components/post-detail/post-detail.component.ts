@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import {
   UpdatePostViewCount,
   GetPostById,
-} from './../../../actions/post.action';
+} from './../../../actions/post.actions';
 import { AppState } from './../../../models/app-state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';

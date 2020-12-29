@@ -1,7 +1,7 @@
 import {
   DirectionActions,
   DirectionActionTypes,
-} from './../actions/direction.action';
+} from './../actions/direction.actions';
 import { Direction } from '../models/direction';
 
 export interface DirectionState {

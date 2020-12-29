@@ -1,7 +1,7 @@
 import {
   PostTypeActions,
   PostTypeActionTypes,
-} from './../actions/post-type.action';
+} from './../actions/post-type.actions';
 import { PostType } from '../models/post-type';
 
 export interface PostTypeState {

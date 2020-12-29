@@ -1,4 +1,4 @@
-import { RegionActions, RegionActionTypes } from './../actions/region.action';
+import { RegionActions, RegionActionTypes } from './../actions/region.actions';
 import { Region } from '../models/region';
 
 export interface RegionState {

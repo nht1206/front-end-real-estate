@@ -1,13 +1,13 @@
-import { LoadPostTypeAction } from './../../../../actions/post-type.action';
+import { LoadPostTypeAction } from './../../../../actions/post-type.actions';
 import { Router } from '@angular/router';
 import {
   SubmitPostingForm,
   AddingImageUrls,
-} from './../../../../actions/post.action';
+} from './../../../../actions/post.actions';
 import { Direction } from './../../../../models/direction';
-import { LoadDirectionAction } from './../../../../actions/direction.action';
-import { LoadCategoryAction } from './../../../../actions/category.action';
-import { LoadRegionAction } from './../../../../actions/region.action';
+import { LoadDirectionAction } from './../../../../actions/direction.actions';
+import { LoadCategoryAction } from '../../../../actions/category.actions';
+import { LoadRegionAction } from './../../../../actions/region.actions';
 import { AppState } from 'src/app/models/app-state';
 import { Store } from '@ngrx/store';
 import { User } from './../../../../models/user';

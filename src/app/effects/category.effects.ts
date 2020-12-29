@@ -4,7 +4,7 @@ import {
   LoadCategoryFailureAction,
   LoadCategorySuccessAction,
   CategoryActionTypes,
-} from './../actions/category.action';
+} from '../actions/category.actions';
 import { CategoryService } from './../services/category.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';

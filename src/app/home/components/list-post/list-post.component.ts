@@ -1,9 +1,9 @@
-import { LoadCategoryAction } from './../../../actions/category.action';
+import { LoadCategoryAction } from '../../../actions/category.actions';
 import { Category } from './../../../models/category';
-import { LoadRegionAction } from './../../../actions/region.action';
+import { LoadRegionAction } from './../../../actions/region.actions';
 import { Region } from './../../../models/region';
 import { PagerService } from './../../../services/pager.service';
-import { SearchAllPostAction } from './../../../actions/post.action';
+import { SearchAllPostAction } from './../../../actions/post.actions';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Page } from 'src/app/models/page';

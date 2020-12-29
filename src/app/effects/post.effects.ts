@@ -17,7 +17,7 @@ import {
   GetPostByIdFailure,
   UpdatePostViewCount,
   AddPostSuccessAction,
-} from '../actions/post.action';
+} from '../actions/post.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, tap } from 'rxjs/operators/';

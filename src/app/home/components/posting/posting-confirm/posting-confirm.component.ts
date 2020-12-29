@@ -1,6 +1,6 @@
 import { async } from '@angular/core/testing';
 import { tap } from 'rxjs/operators/';
-import { AddPostAction } from './../../../../actions/post.action';
+import { AddPostAction } from './../../../../actions/post.actions';
 import { PostImage } from './../../../../models/post-image';
 import { finalize } from 'rxjs/operators';
 import { FirebaseStorageService } from './../../../../services/firebase-storage.service';

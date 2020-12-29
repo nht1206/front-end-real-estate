@@ -4,7 +4,7 @@ import {
   LoadDirectionFailureAction,
   LoadDirectionSuccessAction,
   DirectionActionTypes,
-} from './../actions/direction.action';
+} from './../actions/direction.actions';
 import { DirectionService } from './../services/direction.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';

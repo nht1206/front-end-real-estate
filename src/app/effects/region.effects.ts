@@ -4,7 +4,7 @@ import {
   LoadRegionFailureAction,
   LoadRegionSuccessAction,
   RegionActionTypes,
-} from './../actions/region.action';
+} from './../actions/region.actions';
 import { RegionService } from './../services/region.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';

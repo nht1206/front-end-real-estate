@@ -4,7 +4,7 @@ import {
   LoadPostTypeFailureAction,
   LoadPostTypeSuccessAction,
   PostTypeActionTypes,
-} from './../actions/post-type.action';
+} from './../actions/post-type.actions';
 import { PostTypeService } from './../services/post-type.service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';

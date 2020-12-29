@@ -1,5 +1,5 @@
 import { Search } from './../models/search';
-import { PostActions, PostActionTypes } from './../actions/post.action';
+import { PostActions, PostActionTypes } from './../actions/post.actions';
 import { Post } from '../models/post';
 import { Page } from '../models/page';
 

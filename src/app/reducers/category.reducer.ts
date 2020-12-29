@@ -1,7 +1,7 @@
 import {
   CategoryActions,
   CategoryActionTypes,
-} from './../actions/category.action';
+} from '../actions/category.actions';
 import { Category } from '../models/category';
 
 export interface CategoryState {
