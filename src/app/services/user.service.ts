@@ -27,7 +27,11 @@ export class UserService {
   }
 
   editUser(user: User): Observable<User> {
-    return this.http.patch<User>(`${this.API}/${user.id}`, user);
+    return this.http.put<User>(`${this.API}/${user.id}`, user);
+  }
+
+  updateUser(user: Partial<User>) {
+    return this.http.patch<User>(`${this.API}`, user);
   }
 
   deleteUser(id: number): Observable<User> {
@@ -41,6 +45,12 @@ export class UserService {
   ): Observable<Iterable<Post>> {
     return this.http.get<Iterable<Post>>(
       `${this.API}/${id}/posts?search=${search}&page=${page}`
+    );
+  }
+
+  getUserPosts(page: number, search: string): Observable<Page<Post>> {
+    return this.http.get<Page<Post>>(
+      `${this.API}/userPosts?search=${search}&page=${page}`
     );
   }
 
@@ -58,10 +68,13 @@ export class UserService {
     });
   }
 
-  changePassword(userId: number, password: Password): Observable<User> {
-    return this.http.patch<User>(
+  changePasswordByUserId(userId: number, password: Password): Observable<User> {
+    return this.http.post<User>(
       `${this.API}/${userId}/changePassword`,
       password
     );
+  }
+  changePassword(password: Password): Observable<User> {
+    return this.http.post<User>(`${this.API}/changePassword`, password);
   }
 }

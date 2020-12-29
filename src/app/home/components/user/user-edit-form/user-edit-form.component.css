@@ -1,0 +1,39 @@
+.info-edit {
+  padding: 20px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.vertical {
+  border-left: 1px solid lightgray;
+  height: auto;
+}
+
+#btn-upload {
+  position: relative;
+}
+#input-upload {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+}
+
+.required {
+  color: red;
+}
+.password-change {
+  padding: 20px;
+}
+
+#lock-img {
+  width: 100%;
+  height: 100%;
+}
+
+.required {
+  color: red;
+}

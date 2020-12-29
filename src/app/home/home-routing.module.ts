@@ -1,3 +1,8 @@
+import { AnonymousGuard } from '../helpers/anonymous.guard';
+import { RoleGuard } from './../helpers/role.guard';
+import { RoleName } from './../models/role-name';
+import { AuthGuard } from './../helpers/auth.guard';
+import { UserEditFormComponent } from './components/user/user-edit-form/user-edit-form.component';
 import { UserComponent } from './components/user/user.component';
 import { SupportRequestComponent } from './components/support-request/support-request.component';
 import { PostingConfirmComponent } from './components/posting/posting-confirm/posting-confirm.component';
@@ -19,18 +24,24 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+        canActivate: [AnonymousGuard],
       },
       {
         path: 'register',
         component: RegistrationComponent,
+        canActivate: [AnonymousGuard],
       },
       {
         path: 'posting',
         component: PostingFormComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'ROLE_USER' as RoleName },
       },
       {
         path: 'confirm',
         component: PostingConfirmComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'ROLE_USER' as RoleName },
       },
       {
         path: 'post-detail/:id',
@@ -39,10 +50,18 @@ const routes: Routes = [
       {
         path: 'user',
         component: UserComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'ROLE_USER' as RoleName },
       },
       {
         path: 'support-request',
         component: SupportRequestComponent,
+      },
+      {
+        path: 'user/edit',
+        component: UserEditFormComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'ROLE_USER' as RoleName },
       },
     ],
   },

@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AppState } from 'src/app/models/app-state';
 import { Login } from 'src/app/actions/auth.actions';
 
@@ -18,12 +17,7 @@ export class LoginComponent implements OnInit {
   errorMessage$: Observable<string>;
   successMessage$: Observable<string>;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private store: Store<AppState>
-  ) {
-    this.isAuthenticated$ = store.select((app) => app.auth.isAuthenticated);
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.errorMessage$ = store.select((app) => app.auth.errorMessage);
     this.successMessage$ = store.select((app) => app.auth.successMessage);
     this.loading$ = store.select((app) => app.auth.isLoading);
@@ -33,11 +27,6 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-    });
-    this.isAuthenticated$.subscribe((isAuthenticated) => {
-      if (isAuthenticated) {
-        this.router.navigateByUrl('/');
-      }
     });
   }
 

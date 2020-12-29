@@ -71,6 +71,18 @@ export class AuthEffects {
     })
   );
 
+  @Effect({ dispatch: false }) loadCurrentUserFailure$ = this.actions$.pipe(
+    ofType<LoadCurrentUserFailure>(AuthActionTypes.LOAD_CURRENT_USER_FAILURE),
+    tap(() => {
+      this.router.navigateByUrl('login');
+    })
+  );
+
+  @Effect({ dispatch: false }) loginSuccess$ = this.actions$.pipe(
+    ofType<LoginSuccess>(AuthActionTypes.LOGIN_SUCCESS),
+    tap(() => this.router.navigateByUrl('/'))
+  );
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,

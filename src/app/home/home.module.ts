@@ -1,6 +1,9 @@
+import { AnonymousGuard } from './../helpers/anonymous.guard';
+import { RoleGuard } from './../helpers/role.guard';
+import { AuthGuard } from './../helpers/auth.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -19,6 +22,8 @@ import { SupportRequestComponent } from './components/support-request/support-re
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserInformationComponent } from './components/user/user-information/user-information.component';
 import { UserComponent } from './components/user/user.component';
+import { UserPostListComponent } from './components/user/user-post-list/user-post-list.component';
+import { UserEditFormComponent } from './components/user/user-edit-form/user-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +42,16 @@ import { UserComponent } from './components/user/user.component';
     UserInformationComponent,
     SupportRequestComponent,
     UserComponent,
+    UserPostListComponent,
+    UserEditFormComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
     NgbProgressbarModule,
+    FormsModule,
   ],
+  providers: [AuthGuard, RoleGuard, AnonymousGuard],
 })
 export class HomeModule {}

@@ -4,10 +4,16 @@
 <div class="row">
   <div class="col-lg-4 col-md-4 col-sm-12">
     <img
-      *ngIf="user$ | async"
-      [src]="(user$ | async).avatar"
+      *ngIf="!(user$ | async)?.avatar"
+      src="../../../../../assets/img/avatar.png"
+      class="avatar"
       alt="avatar"
-      style="border-radius: 50%; width: 200px; height: 200px"
+    />
+    <img
+      *ngIf="(user$ | async)?.avatar"
+      [src]="(user$ | async)?.avatar"
+      class="avatar"
+      alt="avatar"
     />
   </div>
   <div class="col-lg-8 col-md-8 col-sm-12" *ngIf="user$ | async">
@@ -29,19 +35,8 @@
     </div>
     <div class="row mt-3">
       <div class="col-6">
-        <button
-          class="btn btn-block btn-primary"
-          [routerLink]="['/update/profile']"
-        >
+        <button class="btn btn-block btn-primary" [routerLink]="['edit']">
           Chỉnh Sửa Thông Tin
-        </button>
-      </div>
-      <div class="col-6">
-        <button
-          class="btn btn-block btn-primary"
-          [routerLink]="['/update/password']"
-        >
-          Đổi Mật Khẩu
         </button>
       </div>
     </div>

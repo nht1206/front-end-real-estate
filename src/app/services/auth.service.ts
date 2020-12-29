@@ -1,8 +1,7 @@
-import { delay, map } from 'rxjs/operators/';
 import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { tap } from 'rxjs/operators';
 
@@ -16,10 +15,14 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
+  private currentUserSubject: Subject<User>;
+
   constructor(
     private http: HttpClient,
     private storageService: StorageService
-  ) {}
+  ) {
+    this.currentUserSubject = new Subject<User>();
+  }
 
   login(credentials): Observable<any> {
     return this.http
@@ -57,6 +60,13 @@ export class AuthService {
   }
 
   loadCurrentUser(): Observable<User> {
-    return this.http.get<User>(AUTH_API + 'me', httpOptions);
+    if (this.storageService.getToken == null) {
+      this.currentUserSubject.next(null);
+    }
+    this.http.get<User>(AUTH_API + 'me', httpOptions).subscribe(
+      (user) => this.currentUserSubject.next(user),
+      () => this.currentUserSubject.next(null)
+    );
+    return this.currentUserSubject.asObservable();
   }
 }

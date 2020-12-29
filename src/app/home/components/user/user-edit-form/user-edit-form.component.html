@@ -1,0 +1,240 @@
+<div class="info-edit">
+  <h3 class="font-weight-normal">Chỉnh sửa thông tin cá nhân</h3>
+  <form
+    appFocusInvalidInput
+    class="row mt-4"
+    [formGroup]="infoEditForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="col-4 text-center">
+      <span>
+        <img
+          *ngIf="!imageUrl && !(user$ | async)?.avatar"
+          src="assets/img/avatar.png"
+          alt="avatar"
+          class="avatar"
+        />
+        <img
+          *ngIf="!imageUrl && (user$ | async)?.avatar"
+          [src]="(user$ | async).avatar"
+          alt="avatar"
+          class="avatar"
+        />
+        <img
+          *ngIf="imageUrl"
+          [src]="imageUrl"
+          alt="avatar"
+          class="avatar"
+          multiple
+        />
+        <span class="row mt-1">
+          <span class="col-1"></span>
+          <span class="col-9">
+            <ngb-progressbar
+              *ngIf="isSubmitted"
+              type="warning"
+              [value]="percentages$ | async"
+              height="8px"
+              [animated]="true"
+            >
+              <span style="font-size: 6px">Completed!</span>
+            </ngb-progressbar>
+          </span>
+          <span class="col-2"></span>
+        </span>
+      </span>
+      <div
+        class="file btn btn-primary mt-2"
+        (click)="inputUpload.click()"
+        id="btn-upload"
+      >
+        Chọn ảnh đại diện
+      </div>
+      <input
+        name="file"
+        type="file"
+        accept="image/*"
+        id="input-upload"
+        hidden
+        #inputUpload
+        (change)="detectFile($event)"
+      />
+    </div>
+    <div class="vertical col-1"></div>
+    <div class="col-7">
+      <div class="form-group row">
+        <label class="col-form-label col-5"
+          ><b>Họ tên:<span class="required">*</span></b></label
+        >
+        <div class="col-7 pr-1">
+          <input class="form-control" formControlName="name" />
+          <p
+            *ngIf="
+              infoEditForm.controls.name.errors?.required &&
+              infoEditForm.controls.name.touched
+            "
+            class="text-danger"
+          >
+            Vui lòng nhập tên của bạn!
+          </p>
+          <p
+            *ngIf="
+              infoEditForm.controls.name.errors?.maxlength &&
+              infoEditForm.controls.name.touched
+            "
+            class="text-danger"
+          >
+            Tên của bạn vượt quá số ký tự cho phép. Vui lòng nhập lại!
+          </p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label col-5"
+          ><b>Địa chỉ:<span class="required">*</span></b></label
+        >
+        <div class="col-7 pr-1">
+          <input class="form-control" formControlName="address" />
+          <p
+            *ngIf="
+              infoEditForm.controls.address.errors?.required &&
+              infoEditForm.controls.address.touched
+            "
+            class="text-danger"
+          >
+            Vui lòng nhập địa chỉ của bạn!
+          </p>
+          <p
+            *ngIf="
+              infoEditForm.controls.address.errors?.maxlength &&
+              infoEditForm.controls.address.touched
+            "
+            class="text-danger"
+          >
+            Địa chỉ của bạn vượt quá số ký tự cho phép. Vui lòng nhập lại!
+          </p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label col-5"
+          ><b>Số điện thoại:<span class="required">*</span></b></label
+        >
+        <div class="col-7 pr-1">
+          <input class="form-control" formControlName="phoneNumber" />
+          <p
+            *ngIf="
+              infoEditForm.controls.phoneNumber.errors?.required &&
+              infoEditForm.controls.phoneNumber.touched
+            "
+            class="text-danger"
+          >
+            Vui lòng nhập số điện thoại!
+          </p>
+          <p
+            *ngIf="
+              infoEditForm.controls.phoneNumber.errors?.pattern &&
+              infoEditForm.controls.phoneNumber.touched
+            "
+            class="text-danger"
+          >
+            Số điện thoại của bạn sai định dạng. Vui lòng nhập lại!
+          </p>
+        </div>
+      </div>
+    </div>
+    <button
+      [disabled]="isSubmitted || !editFormDirty"
+      class="btn btn-primary ml-auto"
+    >
+      Lưu lại
+    </button>
+  </form>
+</div>
+<div class="password-change">
+  <h3 class="font-weight-normal">Đổi mật khẩu</h3>
+  <hr />
+  <form
+    appFocusInvalidInput
+    class="row mt-4"
+    [formGroup]="passwordEditForm"
+    (ngSubmit)="changePassword()"
+  >
+    <div class="col-4 text-center">
+      <img src="assets/img/lock.png" id="lock-img" alt="lock.png" />
+    </div>
+    <div class="col-8">
+      <div class="form-group row">
+        <label class="col-form-label col-5"
+          ><b>Mật khẩu cũ:<span class="required">*</span></b></label
+        >
+        <div class="col-7">
+          <input
+            class="form-control"
+            type="password"
+            formControlName="currentPassword"
+          />
+          <p
+            *ngIf="
+              passwordEditForm.controls.currentPassword.errors?.required &&
+              passwordEditForm.controls.currentPassword.touched
+            "
+            class="text-danger"
+          >
+            Vui lòng nhập mật khẩu hiện tại!
+          </p>
+          <p *ngIf="false" class="text-danger">Mật khẩu cũ không đúng!</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label col-5"
+          ><b>Mật khẩu mới:<span class="required">*</span></b></label
+        >
+        <div class="col-7">
+          <input
+            class="form-control"
+            type="password"
+            formControlName="newPassword"
+          />
+          <p
+            *ngIf="
+              passwordEditForm.value.newPassword ===
+                passwordEditForm.value.currentPassword &&
+              this.passwordEditForm.controls.newPassword.touched
+            "
+            class="text-danger"
+          >
+            Bạn cần nhập mật khẩu mới khác với mật khẩu hiện tại!
+          </p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label col-5"
+          ><b>Nhập lại mật khẩu:<span class="required">*</span></b></label
+        >
+        <div class="col-7">
+          <input
+            class="form-control"
+            type="password"
+            formControlName="confirmNewPassword"
+          />
+          <p
+            *ngIf="
+              passwordEditForm.errors?.notSame &&
+              passwordEditForm.controls.confirmNewPassword.touched
+            "
+            class="text-danger"
+          >
+            Không trùng khớp với mật khẩu mới. Vui lòng xác nhận lại mật khẩu
+            mới!
+          </p>
+        </div>
+      </div>
+      <hr />
+      <button
+        [disabled]="isSubmitted || !passwordEditForm.dirty"
+        class="btn btn-outline-secondary float-right"
+      >
+        Đổi mật khẩu
+      </button>
+    </div>
+  </form>
+</div>

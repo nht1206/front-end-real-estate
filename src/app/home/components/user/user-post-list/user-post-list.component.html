@@ -1,0 +1,131 @@
+<div class="p-3">
+  <h4 class="font-weight-normal">Danh sách các bài viết đã đăng</h4>
+</div>
+<!-- Search form -->
+<div class="input-group ml-auto input-search">
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="search"
+    placeholder="Tìm kiếm theo Tiêu đề"
+  />
+  <div class="input-group-append">
+    <button class="btn btn-primary" (click)="searchHandler()" type="button">
+      Tìm
+    </button>
+  </div>
+</div>
+<br />
+<table class="table table-striped table-hover table-responsive-sm">
+  <caption hidden>
+    Post list
+  </caption>
+  <thead>
+    <tr>
+      <th id="id">Post ID</th>
+      <th id="title">Tiêu đề</th>
+      <th id="post_type">Loại bài viết</th>
+      <th id="category">Danh mục</th>
+      <th id="post_date">Ngày đăng</th>
+      <th id="status">Trạng thái</th>
+      <th id="edit"></th>
+      <th id="delete"></th>
+    </tr>
+  </thead>
+  <tbody *ngIf="!(isLoading$ | async)">
+    <tr *ngFor="let post of (posts$ | async)?.content">
+      <ng-container *ngIf="post.status">
+        <td>
+          <label>{{ post.id }}</label>
+        </td>
+        <td>
+          <label>{{ post.title }}</label>
+        </td>
+        <td>
+          <label>{{ post.postType.name }}</label>
+        </td>
+        <td>
+          <label>{{ post.category.name }}</label>
+        </td>
+        <td>
+          <label>{{ post.createdAt | date: "dd/MM/yyyy" }}</label>
+        </td>
+        <ng-container [ngSwitch]="post.approved">
+          <td *ngSwitchCase="true">Đang rao</td>
+          <td *ngSwitchCase="false">Chưa duyệt</td>
+        </ng-container>
+        <td>
+          <button
+            class="btn btn-light"
+            [routerLink]="['/post-edit/' + post.id]"
+          >
+            <em class="fa fa-edit"></em>
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-light"
+            (click)="openModal(deletePostModal, post)"
+          >
+            <em class="fa fa-times"></em>
+          </button>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+<p *ngIf="(posts$ | async)?.empty && !(isLoading$ | async)">
+  Không tìm thấy bài đăng!
+</p>
+<app-loading [loading]="isLoading$ | async"></app-loading>
+<nav
+  *ngIf="(posts$ | async)?.totalPages > 1"
+  aria-label="Page navigation example"
+>
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="(posts$ | async)?.first">
+      <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+        >Previous</a
+      >
+    </li>
+    <li class="page-item">
+      <a class="page-link" *ngIf="pager?.startPage > 1">...</a>
+    </li>
+    <li class="page-item" *ngFor="let pageNumber of pager.pages">
+      <span class="page-link" (click)="jumpToPage(pageNumber)">{{
+        pageNumber
+      }}</span>
+    </li>
+    <li class="page-item">
+      <a class="page-link" *ngIf="pager?.endPage < (posts$ | async)?.totalPages"
+        >...</a
+      >
+    </li>
+    <li class="page-item" [class.disabled]="(posts$ | async)?.last">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Modal -->
+<ng-template let-modal #deletePostModal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLongTitle">Xác nhận xóa</h5>
+    <button type="button" class="close" (click)="modal.dismiss()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Bạn có muốn xóa bài đăng {{ post.title | uppercase }} đăng ngày
+    {{ post.createdAt | date: "dd/MM/yyyy" }} không?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+      Hủy
+    </button>
+    <button type="button" class="btn btn-primary" (click)="deletePost(post)">
+      Đồng ý
+    </button>
+  </div>
+</ng-template>
