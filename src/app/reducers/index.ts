@@ -5,6 +5,7 @@ import { RegionReducer } from './region.reducer';
 import { CategoryReducer } from './category.reducer';
 import { DirectionReducer } from './direction.reducer';
 import { PostTypeReducer } from './post-type.reducer';
+import { SupportReducer } from './support.reducer';
 
 export const reducers: ActionReducerMap<any> = {
   post: PostReducer,
@@ -13,4 +14,5 @@ export const reducers: ActionReducerMap<any> = {
   category: CategoryReducer,
   direction: DirectionReducer,
   postType: PostTypeReducer,
+  support: SupportReducer,
 };

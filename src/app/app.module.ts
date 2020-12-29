@@ -1,3 +1,4 @@
+import { SupportEffects } from './effects/support.effects';
 import { PostTypeEffects } from './effects/post-type.effects';
 import { DirectionEffects } from './effects/direction.effects';
 import { CategoryEffects } from './effects/category.effects';
@@ -37,6 +38,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
       CategoryEffects,
       DirectionEffects,
       PostTypeEffects,
+      SupportEffects,
     ]),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
