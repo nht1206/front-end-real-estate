@@ -24,6 +24,7 @@ import { UserInformationComponent } from './components/user/user-information/use
 import { UserComponent } from './components/user/user.component';
 import { UserPostListComponent } from './components/user/user-post-list/user-post-list.component';
 import { UserEditFormComponent } from './components/user/user-edit-form/user-edit-form.component';
+import { UserPostEditFormComponent } from './components/user/user-post-edit-form/user-post-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { UserEditFormComponent } from './components/user/user-edit-form/user-edi
     UserComponent,
     UserPostListComponent,
     UserEditFormComponent,
+    UserPostEditFormComponent,
   ],
   imports: [
     CommonModule,

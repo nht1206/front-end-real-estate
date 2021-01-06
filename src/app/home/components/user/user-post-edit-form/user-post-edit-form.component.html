@@ -1,0 +1,391 @@
+<div class="container-fluid m-3">
+  <div id="content">
+    <p class="alert alert-danger" *ngIf="errorMessage$ | async">
+      {{ errorMessage$ | async }}
+    </p>
+    <h3>Đăng tin</h3>
+    <h5>Thông tin liên hệ</h5>
+    <hr style="background-color: black" />
+    <div class="col-md-12 px-5">
+      <div class="row">
+        <label class="col-sm-3">Họ và tên:</label>
+        <label class="col-sm-9">{{ (user$ | async)?.name }}</label>
+      </div>
+      <div class="row">
+        <label class="col-sm-3">Email:</label>
+        <label class="col-sm-9">{{ (user$ | async)?.email }}</label>
+      </div>
+      <div class="row">
+        <label class="col-sm-3">Địa chỉ:</label>
+        <label class="col-sm-9">{{ (user$ | async)?.address }}</label>
+      </div>
+      <div class="row">
+        <label class="col-sm-3">Số điện thoại:</label>
+        <label class="col-sm-9">{{ (user$ | async)?.phoneNumber }}</label>
+      </div>
+    </div>
+    <hr style="background-color: black" />
+    <div class="d-flex">
+      <h5>Nội dung tin</h5>
+      <a class="note">(vui lòng điền đầy đủ tất cả các mục đánh dấu (*))</a>
+    </div>
+    <hr style="background-color: black" />
+  </div>
+  <form class="col-md-12 px-5" [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="category">Danh Mục:</label>
+      <div class="col-sm-9" formGroupName="category">
+        <select id="category" class="form-control" formControlName="id">
+          <option
+            *ngFor="let category of categories$ | async"
+            [ngValue]="category.id"
+            [selected]="category.id == form.value.category.id"
+          >
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="regions">Vùng Miền:</label>
+      <div class="col-sm-9" formGroupName="region">
+        <select class="form-control" id="regions" formControlName="id">
+          <option
+            *ngFor="let region of regions$ | async"
+            [ngValue]="region.id"
+            [selected]="region.id == form.value.region.id"
+          >
+            {{ region.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Bạn Là:</label>
+      <div class="col-sm-9 col-form-label">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="userType"
+            id="personal"
+            [value]="true"
+          />
+          <label class="form-check-label" for="personal">Cá Nhân</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="userType"
+            id="company"
+            [value]="false"
+          />
+          <label class="form-check-label" for="company">Công ty</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Bạn Đăng Tin:</label>
+      <div class="col-sm-9 col-form-label" formGroupName="postType">
+        <select class="form-control" id="postType" formControlName="id">
+          <option
+            *ngFor="let postType of postTypes$ | async"
+            [ngValue]="postType.id"
+            [selected]="postType.id == form.value.postType.id"
+          >
+            {{ postType.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Tình trạng:</label>
+      <div class="col-sm-9 col-form-label">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="condition"
+            id="new"
+            [value]="true"
+          />
+          <label class="form-check-label" for="new">Mới</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="condition"
+            id="used"
+            [value]="false"
+          />
+          <label class="form-check-label" for="used">Đã sử dụng</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="address"
+        >Địa Chỉ:<a class="obligatory">(*)</a></label
+      >
+      <div class="col-sm-9">
+        <input
+          id="address"
+          type="text"
+          class="form-control"
+          placeholder="Nhập địa chỉ"
+          formControlName="address"
+        />
+        <p
+          *ngIf="
+            form.controls.address.errors?.required &&
+            form.controls.address.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập địa chỉ!
+        </p>
+        <p
+          *ngIf="
+            form.controls.address.errors?.maxlength &&
+            form.controls.address.touched
+          "
+          class="text-danger"
+        >
+          Địa chỉ của bạn đã vượt quá số ký tự cho phép. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="area"
+        >Diện Tích:<a class="obligatory">(*)</a></label
+      >
+      <div class="col-sm-9 input-group">
+        <input
+          id="area"
+          class="form-control"
+          placeholder="Nhập diện tích"
+          formControlName="area"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">m<sup>2</sup></span>
+        </div>
+      </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-9">
+        <p
+          *ngIf="
+            form.controls.area.errors?.required && form.controls.area.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập diện tích!
+        </p>
+        <p
+          *ngIf="
+            form.controls.area.errors?.pattern && form.controls.area.touched
+          "
+          class="text-danger"
+        >
+          Sai định dạng số. Vui lòng nhập lại!
+        </p>
+        <p
+          *ngIf="form.controls.area.errors?.min && form.controls.area.touched"
+          class="text-danger"
+        >
+          Diện tích phải là số dương. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="directions">Hướng:</label>
+      <div class="col-sm-9" formGroupName="direction">
+        <select class="form-control" id="directions" formControlName="id">
+          <option
+            *ngFor="let direction of direction$ | async"
+            [ngValue]="direction.id"
+            [selected]="direction.id == form.value.direction.id"
+          >
+            {{ direction.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="title"
+        >Tiêu Đề:<a class="obligatory">(*)</a></label
+      >
+      <div class="col-sm-9">
+        <input
+          id="title"
+          type="text"
+          class="form-control"
+          placeholder="Nhập tiêu đề"
+          formControlName="title"
+        />
+        <p
+          *ngIf="
+            form.controls.title.errors?.required && form.controls.title.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập tiêu đề!
+        </p>
+        <p
+          *ngIf="
+            form.controls.title.errors?.maxlength && form.controls.title.touched
+          "
+          class="text-danger"
+        >
+          Tiêu đề của bạn đã vượt quá số ký tự cho phép. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="postContent"
+        >Nội Dung:<a class="obligatory">(*)</a></label
+      >
+      <div class="col-sm-9">
+        <textarea
+          id="postContent"
+          placeholder="Nhập nội dung"
+          formControlName="content"
+        ></textarea>
+        <p
+          *ngIf="
+            form.controls.content.errors?.required &&
+            form.controls.content.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập nội dung!
+        </p>
+        <p
+          *ngIf="
+            form.controls.content.errors?.maxlength &&
+            form.controls.content.touched
+          "
+          class="text-danger"
+        >
+          Nội dung của bạn đã vượt quá số ký tự cho phép. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label" for="price"
+        >Giá:<a class="obligatory">(*)</a></label
+      >
+      <div class="col-sm-9 input-group">
+        <input
+          id="price"
+          class="form-control"
+          placeholder="Nhập giá"
+          formControlName="price"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text">VNĐ</span>
+        </div>
+      </div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-9">
+        <p
+          *ngIf="
+            form.controls.price.errors?.required && form.controls.price.touched
+          "
+          class="text-danger"
+        >
+          Vui lòng nhập giá!
+        </p>
+        <p
+          *ngIf="
+            form.controls.price.errors?.pattern && form.controls.price.touched
+          "
+          class="text-danger"
+        >
+          Sai định dạng số. Vui lòng nhập lại!
+        </p>
+        <p
+          *ngIf="form.controls.price.errors?.min && form.controls.price.touched"
+          class="text-danger"
+        >
+          Giá phải là số dương. Vui lòng nhập lại!
+        </p>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="deal"
+            [value]="true"
+            id="defaultCheck1"
+          />
+          <label class="form-check-label" for="defaultCheck1">
+            Giá cả có thể thoả thuận.
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Hình ảnh:</label>
+      <div class="col-sm-9">
+        <label style="color: sandybrown"
+          >Chỉ hình ảnh thật của sản phẩm mới được duyệt. Lưu ý không sử dụng
+          hình ảnh có đính kèm số điện thoại hoặc địa chỉ website.</label
+        >
+        <div class="row">
+          <div
+            *ngFor="let imageUrl of imageUrls; let index = index"
+            class="d-flex m-1 preview-image"
+          >
+            <img [src]="imageUrl" height="130" width="150" [alt]="imageUrl" />
+            <i
+              class="fas fa-times-circle btn-delete"
+              (click)="removeImage(index)"
+            ></i>
+          </div>
+          <div class="d-flex m-1 px-3 py-3">
+            <img
+              src="../../../../../assets/img/upload-img.png"
+              height="100"
+              width="100"
+              (click)="addInput.click()"
+              alt="upload-img"
+            />
+          </div>
+        </div>
+        <p *ngIf="imageUrls.length < 5" class="text-danger">
+          Thêm ít nhất 5 ảnh!
+        </p>
+
+        <input
+          type="file"
+          accept="image/*"
+          (change)="fileChange($event)"
+          hidden
+          multiple
+          #addInput
+        />
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center" id="button-post">
+      <div class="col-3">
+        <button
+          class="btn btn-warning btn-block"
+          routerLink="/user"
+          type="button"
+        >
+          <em class="fa fa-chevron-left"></em> Quay lại
+        </button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-info btn-block" type="submit">
+          <em class="fa fa-check"></em> Cập nhật
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

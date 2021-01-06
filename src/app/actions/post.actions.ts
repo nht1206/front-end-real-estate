@@ -10,6 +10,9 @@ export enum PostActionTypes {
   ADD_POST = '[Post] Add Post',
   ADD_POST_SUCCESS = '[Post] Add Post Success',
   ADD_POST_FAILURE = '[Post] Add Post Failure',
+  UPDATE_POST = '[Post] Update Post',
+  UPDATE_POST_SUCCESS = '[Post] Update Post Success',
+  UPDATE_POST_FAILURE = '[Post] Update Post Failure',
   DELETE_POST = '[Post] Delete Post',
   DELETE_POST_SUCCESS = '[Post] Delete Post Success',
   DELETE_POST_FAILURE = '[Post] Delete Post Failure',
@@ -59,6 +62,24 @@ export class AddPostSuccessAction implements Action {
 
 export class AddPostFailureAction implements Action {
   readonly type = PostActionTypes.ADD_POST_FAILURE;
+
+  constructor(public payload: string) {}
+}
+
+export class UpdatePostAction implements Action {
+  readonly type = PostActionTypes.UPDATE_POST;
+
+  constructor(public postId: number, public payload: Post) {}
+}
+
+export class UpdatePostSuccessAction implements Action {
+  readonly type = PostActionTypes.UPDATE_POST_SUCCESS;
+
+  constructor(public payload: Post) {}
+}
+
+export class UpdatePostFailureAction implements Action {
+  readonly type = PostActionTypes.UPDATE_POST_FAILURE;
 
   constructor(public payload: string) {}
 }
@@ -145,6 +166,9 @@ export type PostActions =
   | AddPostAction
   | AddPostSuccessAction
   | AddPostFailureAction
+  | UpdatePostAction
+  | UpdatePostSuccessAction
+  | UpdatePostFailureAction
   | DeletePostAction
   | DeletePostFailureAction
   | SearchAllPostAction

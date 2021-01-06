@@ -17,6 +17,9 @@ import {
   GetPostByIdFailure,
   UpdatePostViewCount,
   AddPostSuccessAction,
+  UpdatePostAction,
+  UpdatePostSuccessAction,
+  UpdatePostFailureAction,
 } from '../actions/post.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -48,6 +51,17 @@ export class PostEffects {
       )
     )
   );
+
+  @Effect() updatePost$ = this.actions$.pipe(
+    ofType<UpdatePostAction>(PostActionTypes.UPDATE_POST),
+    mergeMap((action) =>
+      this.postService.editPost(action.payload, action.postId).pipe(
+        map((post) => new UpdatePostSuccessAction(post)),
+        catchError((err) => of(new UpdatePostFailureAction(err.error.message)))
+      )
+    )
+  );
+
   @Effect() deletePost$ = this.actions$.pipe(
     ofType<DeletePostAction>(PostActionTypes.DELETE_POST),
     mergeMap((action) =>
@@ -102,6 +116,13 @@ export class PostEffects {
       this.router.navigateByUrl('post-detail/' + action.payload.id);
     }),
     mergeMap(() => of(new LoadPostAction(0)))
+  );
+
+  @Effect({ dispatch: false }) updatePostSuccess$ = this.actions$.pipe(
+    ofType<UpdatePostSuccessAction>(PostActionTypes.UPDATE_POST_SUCCESS),
+    tap((action) => {
+      this.router.navigateByUrl('user/post/' + action.payload.id);
+    })
   );
 
   @Effect({ dispatch: false }) addPostFailure$ = this.actions$.pipe(

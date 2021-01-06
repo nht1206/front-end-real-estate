@@ -39,7 +39,7 @@
           <label>{{ post.id }}</label>
         </td>
         <td>
-          <label>{{ post.title }}</label>
+          <a [routerLink]="['post', post.id]">{{ post.title }}</a>
         </td>
         <td>
           <label>{{ post.postType.name }}</label>
@@ -57,7 +57,7 @@
         <td>
           <button
             class="btn btn-light"
-            [routerLink]="['/post-edit/' + post.id]"
+            [routerLink]="['post', post.id, 'edit']"
           >
             <em class="fa fa-edit"></em>
           </button>

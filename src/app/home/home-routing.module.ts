@@ -1,3 +1,4 @@
+import { UserPostEditFormComponent } from './components/user/user-post-edit-form/user-post-edit-form.component';
 import { AnonymousGuard } from '../helpers/anonymous.guard';
 import { RoleGuard } from './../helpers/role.guard';
 import { RoleName } from './../models/role-name';
@@ -52,6 +53,14 @@ const routes: Routes = [
         component: UserComponent,
         canActivate: [AuthGuard, RoleGuard],
         data: { role: 'ROLE_USER' as RoleName },
+      },
+      {
+        path: 'user/post/:id',
+        component: PostDetailComponent,
+      },
+      {
+        path: 'user/post/:id/edit',
+        component: UserPostEditFormComponent,
       },
       {
         path: 'support-request',
