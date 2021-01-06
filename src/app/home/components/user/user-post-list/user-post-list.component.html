@@ -124,7 +124,11 @@
     <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
       Hủy
     </button>
-    <button type="button" class="btn btn-primary" (click)="deletePost(post)">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="deletePost(post.id + '')"
+    >
       Đồng ý
     </button>
   </div>

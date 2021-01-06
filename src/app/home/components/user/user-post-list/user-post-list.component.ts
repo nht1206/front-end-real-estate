@@ -1,3 +1,4 @@
+import { DeletePostAction } from './../../../../actions/post.actions';
 import { PagerService } from './../../../../services/pager.service';
 import { GetUserPosts } from './../../../../actions/user.actions';
 import { Store } from '@ngrx/store';
@@ -23,7 +24,6 @@ export class UserPostListComponent implements OnInit {
   isLoading$: Observable<boolean>;
 
   constructor(
-    private postService: PostService,
     private modalService: NgbModal,
     private store: Store<AppState>,
     private pagerService: PagerService
@@ -57,14 +57,9 @@ export class UserPostListComponent implements OnInit {
     );
   }
 
-  deletePost(post: Post): void {
-    this.postService.getPostById(post.id).subscribe((data) => {
-      post = data;
-    });
-    post.status = false;
-    this.postService.editPost(post, post.id).subscribe((data) => {
-      console.log(data);
-    });
+  deletePost(postId: string): void {
+    this.store.dispatch(new DeletePostAction(postId));
+    this.jumpToPage(this.page);
     this.modalService.dismissAll();
   }
 
